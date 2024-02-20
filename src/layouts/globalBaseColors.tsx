@@ -1,0 +1,229 @@
+import { css } from 'styled-components'
+
+export const paperPalette = css`
+  --paper-opacity-factor: 1;
+  --color-scale-paper-surface1: #f8eaec;
+  --color-scale-paper-surface2: #faf0f2;
+  --color-scale-paper-surface3: #fcf5f7;
+  --color-scale-paper-surface4: #fdfcfc;
+  --color-scale-paper-surface5: #fff;
+  --color-scale-paper-surface1-alpha-transparent: #f8eaec00;
+  --color-scale-paper-surface2-alpha-transparent: #faf0f200;
+  --color-scale-paper-surface3-alpha-transparent: #fcf5f700;
+  --color-scale-paper-surface4-alpha-transparent: #fdfcfc00;
+  --color-scale-paper-surface5-alpha-transparent: #fff0;
+  --color-scale-paper-surface1-alpha-translucent: #f8eaecb3;
+  --color-scale-paper-surface2-alpha-translucent: #faf0f2b3;
+  --color-scale-paper-surface3-alpha-translucent: #fcf5f7b3;
+  --color-scale-paper-surface4-alpha-translucent: #fdfcfcb3;
+  --color-scale-paper-surface5-alpha-translucent: #ffffffb3;
+  --color-scale-paper-surface1-alpha-backdrop: #f8eaece6;
+  --color-scale-paper-surface2-alpha-backdrop: #faf0f2e6;
+  --color-scale-paper-surface3-alpha-backdrop: #fcf5f7e6;
+  --color-scale-paper-surface4-alpha-backdrop: #fdfcfce6;
+  --color-scale-paper-surface5-alpha-backdrop: #ffffffe6;
+  --color-scale-paper-gray1: #161213;
+  --color-scale-paper-gray2: #2f2729;
+  --color-scale-paper-gray3: #4a3f41;
+  --color-scale-paper-gray4: #65585a;
+  --color-scale-paper-gray5: #7c6e71;
+  --color-scale-paper-gray6: #a19798;
+  --color-scale-paper-gray7: #c5bfc0;
+  --color-scale-paper-gray8: rgb(148 137 139 / 22%);
+  --color-scale-paper-gray9: rgb(148 137 139 / 16%);
+  --color-scale-paper-red1: #cb3510;
+  --color-scale-paper-red2: #ed4921;
+  --color-scale-paper-red3: #f17456;
+  --color-scale-paper-red4: #f59a84;
+  --color-scale-paper-red5: #f9c5b8;
+  --color-scale-paper-red6: #fce1d9;
+  --color-scale-paper-yellow1: #84a10d;
+  --color-scale-paper-yellow2: #9bbd0f;
+  --color-scale-paper-yellow3: #bae312;
+  --color-scale-paper-yellow4: #d3f155;
+  --color-scale-paper-yellow5: #e5f79c;
+  --color-scale-paper-yellow6: #f6fcde;
+  --color-scale-paper-green1: #04a934;
+  --color-scale-paper-green2: #06d542;
+  --color-scale-paper-green3: #1ffa5e;
+  --color-scale-paper-green4: #65fb90;
+  --color-scale-paper-green5: #96fdb4;
+  --color-scale-paper-green6: #cdfedb;
+  --color-scale-paper-teal1: #0d88a5;
+  --color-scale-paper-teal2: #0f9cbd;
+  --color-scale-paper-teal3: #12bee8;
+  --color-scale-paper-teal4: #55d3f2;
+  --color-scale-paper-teal5: #a0e7f8;
+  --color-scale-paper-teal6: #def7fc;
+  --color-scale-paper-blue1: #5d39ef;
+  --color-scale-paper-blue2: #6847f0;
+  --color-scale-paper-blue3: #927bf4;
+  --color-scale-paper-blue4: #aa97f7;
+  --color-scale-paper-blue5: #d4cbfb;
+  --color-scale-paper-blue6: #efecfd;
+  --color-scale-paper-purple1: #c610a3;
+  --color-scale-paper-purple2: #ed1cc4;
+  --color-scale-paper-purple3: #f150d2;
+  --color-scale-paper-purple4: #f580de;
+  --color-scale-paper-purple5: #f9b4ec;
+  --color-scale-paper-purple6: #fde3f8;
+`
+
+export const charcoalPalette = css`
+  --charcoal-opacity-factor: 1.2;
+  --color-scale-charcoal-surface1: #131313;
+  --color-scale-charcoal-surface2: #171717;
+  --color-scale-charcoal-surface3: #1b1b1b;
+  --color-scale-charcoal-surface4: #1f1f1f;
+  --color-scale-charcoal-surface5: #242424;
+  --color-scale-charcoal-surface1-alpha-transparent: #13131300;
+  --color-scale-charcoal-surface2-alpha-transparent: #17171700;
+  --color-scale-charcoal-surface3-alpha-transparent: #1b1b1b00;
+  --color-scale-charcoal-surface4-alpha-transparent: #1f1f1f00;
+  --color-scale-charcoal-surface5-alpha-transparent: #24242400;
+  --color-scale-charcoal-surface1-alpha-translucent: #131313b3;
+  --color-scale-charcoal-surface2-alpha-translucent: #171717b3;
+  --color-scale-charcoal-surface3-alpha-translucent: #1b1b1bb3;
+  --color-scale-charcoal-surface4-alpha-translucent: #1f1f1fb3;
+  --color-scale-charcoal-surface5-alpha-translucent: #242424b3;
+  --color-scale-charcoal-surface1-alpha-backdrop: #131313eb;
+  --color-scale-charcoal-surface2-alpha-backdrop: #171717eb;
+  --color-scale-charcoal-surface3-alpha-backdrop: #1b1b1beb;
+  --color-scale-charcoal-surface4-alpha-backdrop: #1f1f1feb;
+  --color-scale-charcoal-surface5-alpha-backdrop: #242424eb;
+  --color-scale-charcoal-gray1: #f1f2f4;
+  --color-scale-charcoal-gray2: #d5d9dc;
+  --color-scale-charcoal-gray3: #bdc2c7;
+  --color-scale-charcoal-gray4: #a2a8ae;
+  --color-scale-charcoal-gray5: #858c93;
+  --color-scale-charcoal-gray6: #686e73;
+  --color-scale-charcoal-gray7: #494d50;
+  --color-scale-charcoal-gray8: rgb(102 107 112 / 22%);
+  --color-scale-charcoal-gray9: rgb(102 107 112 / 14%);
+  --color-scale-charcoal-red1: rgb(255 115 82 / 100%);
+  --color-scale-charcoal-red2: rgb(255 115 82 / 90%);
+  --color-scale-charcoal-red3: rgb(255 115 82 / 80%);
+  --color-scale-charcoal-red4: rgb(255 115 82 / 60%);
+  --color-scale-charcoal-red5: rgb(255 115 82 / 40%);
+  --color-scale-charcoal-red6: rgb(255 115 82 / 12%);
+  --color-scale-charcoal-yellow1: rgb(184 229 0 / 100%);
+  --color-scale-charcoal-yellow2: rgb(184 229 0 / 90%);
+  --color-scale-charcoal-yellow3: rgb(184 229 0 / 80%);
+  --color-scale-charcoal-yellow4: rgb(184 229 0 / 60%);
+  --color-scale-charcoal-yellow5: rgb(184 229 0 / 40%);
+  --color-scale-charcoal-yellow6: rgb(184 229 0 / 08%);
+  --color-scale-charcoal-green1: rgb(0 204 59 / 100%);
+  --color-scale-charcoal-green2: rgb(0 204 59 / 90%);
+  --color-scale-charcoal-green3: rgb(0 204 59 / 80%);
+  --color-scale-charcoal-green4: rgb(0 204 59 / 60%);
+  --color-scale-charcoal-green5: rgb(0 204 59 / 40%);
+  --color-scale-charcoal-green6: rgb(0 204 59 / 14%);
+  --color-scale-charcoal-teal1: rgb(15 209 255 / 100%);
+  --color-scale-charcoal-teal2: rgb(15 209 255 / 90%);
+  --color-scale-charcoal-teal3: rgb(15 209 255 / 80%);
+  --color-scale-charcoal-teal4: rgb(15 209 255 / 60%);
+  --color-scale-charcoal-teal5: rgb(15 209 255 / 40%);
+  --color-scale-charcoal-teal6: rgb(15 209 255 / 12%);
+  --color-scale-charcoal-blue1: rgb(153 128 255 / 100%);
+  --color-scale-charcoal-blue2: rgb(153 128 255 / 90%);
+  --color-scale-charcoal-blue3: rgb(153 128 255 / 80%);
+  --color-scale-charcoal-blue4: rgb(153 128 255 / 60%);
+  --color-scale-charcoal-blue5: rgb(153 128 255 / 40%);
+  --color-scale-charcoal-blue6: rgb(153 128 255 / 12%);
+  --color-scale-charcoal-purple1: rgb(255 92 223 / 100%);
+  --color-scale-charcoal-purple2: rgb(255 92 223 / 90%);
+  --color-scale-charcoal-purple3: rgb(255 92 223 / 80%);
+  --color-scale-charcoal-purple4: rgb(255 92 223 / 60%);
+  --color-scale-charcoal-purple5: rgb(255 92 223 / 40%);
+  --color-scale-charcoal-purple6: rgb(255 92 223 / 14%);
+`
+
+/* stylelint-disable custom-property-pattern */
+export const colorDeclarations = (p: 'paper' | 'charcoal') => css`
+  --opacity-factor: var(--${p}-opacity-factor);
+  --color-scale-surface1: var(--color-scale-${p}-surface1);
+  --color-scale-surface2: var(--color-scale-${p}-surface2);
+  --color-scale-surface3: var(--color-scale-${p}-surface3);
+  --color-scale-surface4: var(--color-scale-${p}-surface4);
+  --color-scale-surface5: var(--color-scale-${p}-surface5);
+  --color-scale-surface1-alpha-transparent: var(
+    --color-scale-${p}-surface1-alpha-transparent
+  );
+  --color-scale-surface2-alpha-transparent: var(
+    --color-scale-${p}-surface2-alpha-transparent
+  );
+  --color-scale-surface3-alpha-transparent: var(
+    --color-scale-${p}-surface3-alpha-transparent
+  );
+  --color-scale-surface4-alpha-transparent: var(
+    --color-scale-${p}-surface4-alpha-transparent
+  );
+  --color-scale-surface5-alpha-transparent: var(
+    --color-scale-${p}-surface5-alpha-transparent
+  );
+  --color-scale-surface1-alpha-translucent: var(
+    --color-scale-${p}-surface1-alpha-translucent
+  );
+  --color-scale-surface2-alpha-translucent: var(
+    --color-scale-${p}-surface2-alpha-translucent
+  );
+  --color-scale-surface3-alpha-translucent: var(
+    --color-scale-${p}-surface3-alpha-translucent
+  );
+  --color-scale-surface4-alpha-translucent: var(
+    --color-scale-${p}-surface4-alpha-translucent
+  );
+  --color-scale-surface5-alpha-translucent: var(
+    --color-scale-${p}-surface5-alpha-translucent
+  );
+  --color-scale-surface1-alpha-backdrop: var(--color-scale-${p}-surface1-alpha-backdrop);
+  --color-scale-surface2-alpha-backdrop: var(--color-scale-${p}-surface2-alpha-backdrop);
+  --color-scale-surface3-alpha-backdrop: var(--color-scale-${p}-surface3-alpha-backdrop);
+  --color-scale-surface4-alpha-backdrop: var(--color-scale-${p}-surface4-alpha-backdrop);
+  --color-scale-surface5-alpha-backdrop: var(--color-scale-${p}-surface5-alpha-backdrop);
+  --color-scale-gray1: var(--color-scale-${p}-gray1);
+  --color-scale-gray2: var(--color-scale-${p}-gray2);
+  --color-scale-gray3: var(--color-scale-${p}-gray3);
+  --color-scale-gray4: var(--color-scale-${p}-gray4);
+  --color-scale-gray5: var(--color-scale-${p}-gray5);
+  --color-scale-gray6: var(--color-scale-${p}-gray6);
+  --color-scale-gray7: var(--color-scale-${p}-gray7);
+  --color-scale-gray8: var(--color-scale-${p}-gray8);
+  --color-scale-gray9: var(--color-scale-${p}-gray9);
+  --color-scale-red1: var(--color-scale-${p}-red1);
+  --color-scale-red2: var(--color-scale-${p}-red2);
+  --color-scale-red3: var(--color-scale-${p}-red3);
+  --color-scale-red4: var(--color-scale-${p}-red4);
+  --color-scale-red5: var(--color-scale-${p}-red5);
+  --color-scale-red6: var(--color-scale-${p}-red6);
+  --color-scale-yellow1: var(--color-scale-${p}-yellow1);
+  --color-scale-yellow2: var(--color-scale-${p}-yellow2);
+  --color-scale-yellow3: var(--color-scale-${p}-yellow3);
+  --color-scale-yellow4: var(--color-scale-${p}-yellow4);
+  --color-scale-yellow5: var(--color-scale-${p}-yellow5);
+  --color-scale-yellow6: var(--color-scale-${p}-yellow6);
+  --color-scale-green1: var(--color-scale-${p}-green1);
+  --color-scale-green2: var(--color-scale-${p}-green2);
+  --color-scale-green3: var(--color-scale-${p}-green3);
+  --color-scale-green4: var(--color-scale-${p}-green4);
+  --color-scale-green5: var(--color-scale-${p}-green5);
+  --color-scale-green6: var(--color-scale-${p}-green6);
+  --color-scale-teal1: var(--color-scale-${p}-teal1);
+  --color-scale-teal2: var(--color-scale-${p}-teal2);
+  --color-scale-teal3: var(--color-scale-${p}-teal3);
+  --color-scale-teal4: var(--color-scale-${p}-teal4);
+  --color-scale-teal5: var(--color-scale-${p}-teal5);
+  --color-scale-teal6: var(--color-scale-${p}-teal6);
+  --color-scale-blue1: var(--color-scale-${p}-blue1);
+  --color-scale-blue2: var(--color-scale-${p}-blue2);
+  --color-scale-blue3: var(--color-scale-${p}-blue3);
+  --color-scale-blue4: var(--color-scale-${p}-blue4);
+  --color-scale-blue5: var(--color-scale-${p}-blue5);
+  --color-scale-blue6: var(--color-scale-${p}-blue6);
+  --color-scale-purple1: var(--color-scale-${p}-purple1);
+  --color-scale-purple2: var(--color-scale-${p}-purple2);
+  --color-scale-purple3: var(--color-scale-${p}-purple3);
+  --color-scale-purple4: var(--color-scale-${p}-purple4);
+  --color-scale-purple5: var(--color-scale-${p}-purple5);
+  --color-scale-purple6: var(--color-scale-${p}-purple6);
+`

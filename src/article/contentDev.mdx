@@ -1,0 +1,159 @@
+import { Fragment } from 'react'
+
+import Callout from './callout'
+import LivePrediction from './livePrediction'
+import ABCDGraph from './partI/sampling/abcdGraph'
+import StaticABCDGraph from './partI/staticABCDGraph'
+import HMMEmissionGraph from './partII/emissionGraph'
+import HMMEmissionPaths from './partII/emissionPaths'
+import HMMNERGraph from './partII/nerGraph'
+import HMMOverviewGraph from './partII/overviewGraph'
+import HMMPerEntityScorecards from './partII/perEntityScorecards'
+import HMMPerWordScorecard from './partII/perWordScorecard'
+import HMMTransitionGraph from './partII/transitionGraph'
+import HMMTransitionPaths from './partII/transitionPaths'
+import MEMMDiscriminativeGraph from './partIII/discriminativeGraph'
+import MEMMFeatureBreakdown from './partIII/featureBreakdown'
+import MEMMMostInformativeFeatures from './partIII/mostInformativeFeatures'
+import MEMMOverviewGraph from './partIII/overviewGraph'
+import MEMMPerEntityScorecards from './partIII/perEntityScorecards'
+import MEMMPerWordScorecard from './partIII/perWordScorecards'
+import CRFOverviewGraph from './partIV/overviewGraph'
+import CRFOverviewGraphLongRange from './partIV/overviewGraphLongRange'
+import CRFRandomFieldGraph from './partIV/randomFieldGraph'
+import CRFUnaryPerEntityScorecards from './partIV/unaryPerEntityScorecards'
+import CRFUnaryPerWordScorecards from './partIV/unaryPerWordScorecards'
+import CRFUndirectedGraphExample from './partIV/undirectedGraphExample'
+import BinaryOOVHeatmap from './precisionRecallHeatmaps/binaryOOVHeatmap'
+import EntityLengthHeatmap from './precisionRecallHeatmaps/entityLengthHeatmap'
+import OOVRateHeatmap from './precisionRecallHeatmaps/oovRateHeatmap'
+
+<Header></Header>
+
+## IV. Conditional Random Fields
+
+Conditional Random Fields (CRFs) are a class of undirected probabilistic models. They have proved to be powerful models with a wide range of applications, including text processing [@Lafferty2001; @Taskar2002; @Peng2004], image recognition [@Kumar2003; @He2004; @Zheng2015; @Teichmann2018], and bioinformatics [@Sato2005; @Liu2006].
+
+While CRFs can have any graph structure, in this article we’ll focus on the linear-chain version:
+
+<CRFOverviewGraph />
+
+### Markov Random Fields
+
+CRFs are a type of Markov Random Fields (MRFs) — probability distributions over random variables defined by _undirected_ graphs [@Blake2011]:
+
+<CRFRandomFieldGraph />
+
+Undirected graphs are appropriate for when it’s difficult or implausible to establish causal, generative relationships between random variables. Social networks are a good example of undirected relationships. We can think of $A$, $B$, and $C$ in the graph above as people in a simple network. $A$ and $B$ are friends and tend to share similar beliefs. The same goes for $B$ and $C$ as well as $C$ and $A$. We might, for example, want to model how each person in the network thinks about a specific topic.
+
+Acyclic Directed graphs fail to adequately represent the mutual belief propagation that occurs within the group. For example, we might have an edge from $A$ to $B$ but no path from $B$ back to $A$ — there will always be at least one such exclusion in an acyclic directed graph.
+
+Rather than assuming a generative relationship between variables, MRFs model their mutual relationships with non-negative scoring functions $\phi$, called _factors_, that assign higher scores if the variables’ values are in agreement, for example:
+
+$$
+\phi(X, Y) = \begin{cases}
+	\textrm{3 if $X = 1$ and $Y = 1$} \\
+	\textrm{2 if $X = 0$ and $Y = 0$} \\
+	\textrm{1 otherwise}
+	\end{cases}
+$$
+
+Unlike conditional probabilities, there is no assumed directionality in scoring functions. These functions simply return higher scores if the variables agree and lower scores if they disagree. They model pairwise correlation, not causation.
+
+The joint probability of all variables in the graph is:
+
+$$
+p(A,B,C) = \frac{1}{Z}\,\phi(A,B)\,\phi(B,C)\,\phi(C,A) \\
+\footnotesize\textrm{where Z is a normalization factor}
+$$
+
+The factors $\phi$ promote assignments in which their constituent variables ($A$ and $B$ in the case of $\phi(A, B)$) agree with each other. The assignment 1-1-1 would receive a higher score and thus have higher probability than say 1-1-0, since there is more agreement in the former case.
+
+More generally, MRFs are probability distributions $p$ over random variables $x_1$, $x_2$,… that are defined by an undirected graph $\mathcal{G}$ and have the form:
+
+$$
+p(x_1, x_2,…) = \frac{1}{Z}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(x_c)} \\
+\footnotesize\textrm{where Z is a normalization factor} \\
+\footnotesize\textrm{and C is the set of cliques in $\mathcal{G}$}
+$$
+
+We don’t need to define a factor $\phi_c$ for every clique $c$. We may, for example, skip any clique containing only one node.
+
+<CRFUndirectedGraphExample />
+
+MRFs have a generalized form of which the directed models we’ve seen so far — HMMs and MEMMs — are special cases. The factors $\phi_c$ can be defined as conditional probabilities, for example $\phi_c(x_1,x_2) = p(x_2|x_1)$, and act as the transition and emission probabilities that characterize HMMs and MEMMs.
+
+The additional level of generality comes at a cost, however: the normalization factors $Z$ are often difficult to compute. They require summing over an exponential number of potential assignments, an infeasible task if the network is large enough. Fortunately, there are configurations that can be solved using efficient decoding algorithms. That includes linear-chain CRFs, which can be decoded with the Viterbi algorithm.
+
+### Conditional Form
+
+CRFs are random fields globally conditioned on a set of observations $x$ [@Lafferty2001] and have the form:
+
+$$
+p(y|x) = \frac{1}{Z(x)}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(y_c, x_c)} \\
+\footnotesize\textrm{where Z is a normalization factor} \\
+\footnotesize\textrm{and C is the set of cliques in the} \\
+\footnotesize\textrm{graph $\mathcal{G}$ representing the labels $y$}
+$$
+
+The distribution $p(y|x)$ is parameterized by $x$. When we replace all the values $x_i$ in the right hand side with real values, what remains has the same form as an MRF. In fact, we get a new MRF for every observation sequence $x$.
+
+CRFs are globally conditioned on $x$ [@Lafferty2001]. They directly model the probability of the entire label sequence $y$ — $p(y|x)$ — rather than local transition/emission probabilities $p(y_i|y_{i-1})$ or $p(y_i|x_i)$.
+
+Global conditioning on $x$ means that the hidden states $y_i$ can depend not only on the current observation but also any other observation in the sequence. Adding more such dependencies to the model does not increase the computational complexity of inference tasks, since we don’t have to model the marginal probabilities $p(x_i)$ at train/test time.
+
+<CRFOverviewGraphLongRange />
+
+### Exponential Factors
+
+While the factors $\phi_c$ can be any real-valued non-negative function, they usually have exponential form similar to MEMMs’ transition functions [@Sutton2010]:
+
+$$
+\phi_c(y_c, x_c) = \exp\left(\sum_{a}{\lambda_a \, f_a(y_c, x_c)}\right) \\
+\footnotesize\textrm{where $f_a$ is a feature function defined for clique $c$} \\
+\footnotesize\textrm{and $\lambda_a$ is the weight parameter for $f_a$}
+$$
+
+Like with MEMMs, we can define the feature functions $f_a$ as binary indicators for the current state or observation. One such indicator may be “the previous state is B-LOC and the current state is I-LOC”. Then at train time we can learn the weight parameters $\lambda_a$ that best fit the given data.
+
+### Training & Inference
+
+During training, estimation of the weight vector $\lambda$ is performed by likelihood maximization. The process has an intuitive and elegant interpretation: by maximizing the training data’s likelihood, we’re also brining the expected value of the feature functions $f_a$ closer to their train-set averages [@Sutton2010]. This is analogous to the maximum-entropy interpretation of parameter estimation in MEMMs [@McCallum2000].
+
+In the case of linear-chain CRFs, inference can be done efficiently using modified versions of the forward, backward, and Viterbi algorithm [@Sutton2010]. Since the distribution $p(y|x)$ is a product of factors $\phi_c$, we can progresively move through the chain, going node to node, adding more factors to the cumulative product. The factors $\phi_c$ play the same role in these algorithms as the transition and emission probabilities of HMMs and MEMMs.
+
+### Results
+
+<LivePrediction
+	models={['crf']}
+	initialInputValue="New York Stock Exchange"
+	label="Name tag predictions by CRF:"
+/>
+
+### Label Bias Problem
+
+Global conditioning on $x$ helps CRFs avoid the label bias problem [@McCallum2000]. The problem mostly affects models with local probability normalization, including MEMMs [@Hannun2019]. CRFs avoid this since they model the probability of the entire state sequence $p(y|x)$, which has a single, global normalization factor $Z$.
+
+CRFs’ robustness against label bias, at least compared to MEMMs, has been well demonstrated in experimental conditions [@McCallum2000]. In practical applications, however, it’s more difficult to capture the presence and effect of label bias due to a myriad of confounding factors. Still, we can rule out potential confounders and try to isolate label bias in our test systems.
+
+A test linear-chain CRF was trained using the same data and features as the MEMM in the previous section. Each hidden state in the CRF depends only on the current observation, forming a unary chain structure similar to the MEMM’s.
+
+The resulting CRF closely resembles the baseline MEMM. Both have exponential form with a weighted sum of all word features as the exponent. The only meaningful difference between the two is how normalization is done: globally for the CRF and locally for the MEMM. Since the label bias problem comes from local normalization, we should see more bias, observable as errors, in the MEMM than the CRF.
+
+Overall, the CRF strongly outperforms the MEMM. While it has slightly lower accuracy (compared to the MEMM’s 93.1%):
+
+<CRFUnaryPerWordScorecards />
+
+…the CRF makes predictions with significantly higher precision and recall:
+
+<CRFUnaryPerEntityScorecards />
+
+The performance gains are spread out across states and OOV status:
+
+<BinaryOOVHeatmap models={['crf-unary', 'memm']} />
+
+Since both models are trained with the same dataset, features, and unary structure, the increased performance is attributable to global normalization. While these results are not a definitive proof of CRFs’ resistance to the label bias problem — global normalization could help improve model performance in other ways, it is nonetheless encouraging.
+
+---
+
+<References />

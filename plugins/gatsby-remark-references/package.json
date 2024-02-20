@@ -1,0 +1,11 @@
+{
+  "name": "gatsby-remark-references",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Vu Luong",
+  "license": "MIT",
+  "dependencies": {
+    "acorn": "^8.8.0",
+    "unist-util-visit": "^2"
+  }
+}

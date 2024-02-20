@@ -1,0 +1,47 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"jsx": "react-jsx",
+		"target": "esnext",
+		"lib": ["dom", "esnext"],
+		"module": "esnext",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"useDefineForClassFields": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"noImplicitThis": false,
+		"paths": {
+			"@utils": ["./src/utils"],
+			"@utils/*": ["./src/utils/*"],
+			"@components": ["./src/components"],
+			"@components/*": ["./src/components/*"],
+			"@pageComponents": ["./src/pageComponents"],
+			"@pageComponents/*": ["./src/pageComponents/*"],
+			"@icons": ["./src/icons"],
+			"@icons/*": ["./src/icons/*"],
+			"@data": ["./src/data"],
+			"@data/*": ["./src/data/*"],
+			"@types": ["./src/types"],
+			"@types/*": ["./src/types/*"],
+			"@layouts": ["./src/layouts"],
+			"@layouts/*": ["./src/layouts/*"],
+			"@theme": ["./src/layouts/theme"],
+			"@theme/*": ["./src/layouts/theme/*"],
+			"@templates": ["./src/templates"],
+			"@templates/*": ["./src/templates/*"],
+			"@images": ["./src/images"],
+			"@images/*": ["./src/images/*"]
+		}
+	},
+	"include": [
+		"./src/**/*.ts",
+		"./src/**/*.tsx",
+		"./gatsby-node.ts",
+		"./gatsby-config.ts",
+		"./global.d.ts",
+		"./modules.d.ts"
+	]
+}
