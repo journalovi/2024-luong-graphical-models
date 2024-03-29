@@ -1,15 +1,8 @@
 import { HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-import Footer from '@components/footer'
-
 const Page = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
-	return (
-		<PageContent {...props}>
-			{children}
-			<Footer />
-		</PageContent>
-	)
+	return <PageContent {...props}>{children}</PageContent>
 }
 
 export default Page
