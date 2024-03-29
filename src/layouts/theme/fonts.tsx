@@ -41,7 +41,7 @@ const generateFontDefinitions = ({
 				fontStyle: style,
 				fontWeight: weight,
 				src: formats.map((format) => ({
-					url: `/fonts/${subfolder}/${family.replace(/(\s|-)/g, '')}-${
+					url: `fonts/${subfolder}/${family.replace(/(\s|-)/g, '')}-${
 						weightsMap[weight]
 					}${stylesMap[style]}.${extensionsMap[format]}`,
 					format,
