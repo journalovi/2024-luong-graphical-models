@@ -40,11 +40,12 @@ const Footer = () => {
 			<FooterSectionWrap>
 				<FooterSectionHeader>Authorship</FooterSectionHeader>
 				<FooterSectionContent>
-					<strong>Vu Luong:</strong> conceptualization, methodology, investigation,
-					software, visualization, writing – original draft.
+					<strong>Vu Luong (Minerva University):</strong> conceptualization, methodology,
+					investigation, software, visualization, writing – original draft.
 				</FooterSectionContent>
 				<FooterSectionContent>
-					<strong>Justin Selig:</strong> conceptualization, writing – review & editing.
+					<strong>Justin Selig (Cornell University):</strong> conceptualization, writing –
+					review & editing.
 				</FooterSectionContent>
 			</FooterSectionWrap>
 
