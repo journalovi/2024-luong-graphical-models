@@ -1,3 +1,7 @@
+```diff
+! This paper is under review on the experimental track of the Journal of Visualization and Interaction.
+```
+
 # Graphical Models
 
 This is a self-contained version of "Learning What’s in a Name with Graphical Models". The HTML & JavaScript that is generated (via `yarn build`) works without needing a live backend. A pre-built version is available in `/public`.
