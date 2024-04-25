@@ -3,8 +3,9 @@ on:
   push:
     branches:
       - master
+      - main
 
-name: Idyll Publish
+name: Publish
 
 jobs:
   build-deploy:
