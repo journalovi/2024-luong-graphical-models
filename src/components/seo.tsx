@@ -1,7 +1,5 @@
 import { Fragment, ReactNode } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-
-import defaultOgImage from '@images/og.png'
+import { graphql, useStaticQuery, withPrefix } from 'gatsby'
 
 export interface SEOProps {
   title?: string
@@ -53,7 +51,7 @@ const SEO = ({
     author: author ?? siteMetadata?.author,
     authorTwitter: authorTwitter ?? siteMetadata?.authorTwitter,
     image: image ?? {
-      src: `${siteMetadata?.siteUrl ?? ''}${defaultOgImage as string}`,
+      src: withPrefix('og.png'),
       alt: 'Wordmark logo with the letter G \\',
       width: 1200,
       height: 630,

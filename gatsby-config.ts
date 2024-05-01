@@ -10,10 +10,11 @@ dotenv.config({
 })
 
 const config: GatsbyConfig = {
+  pathPrefix: '/2024-luong-graphical-models',
   siteMetadata: {
     lang: 'en-US',
     dir: 'ltr',
-    siteUrl: 'https://graphical-models.netlify.app',
+    siteUrl: 'https://graphical-models.netlify.app/',
     title: 'Learning What’s in a Name with Graphical Models',
     description:
       'We explore three sequence models that are remarkably successful at named entity recognition: Hidden markov Models (HMMs), Maximum-Entropy Markov Models (MEMMs), and Conditional Random Fields (CRFs)',
@@ -103,7 +104,7 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-gatsby-cloud',
       options: {
         headers: {
-          '/fonts/*': [
+          'fonts/*': [
             'Cache-Control: public,max-age=31536000,s-maxage=31536000,immutable',
           ],
         },

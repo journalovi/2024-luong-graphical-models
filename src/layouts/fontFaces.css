@@ -2,57 +2,61 @@
 	font-family: 'Sohne';
 	font-weight: 400;
 	font-style: normal;
-	src: url('/fonts/sohne/Sohne-Buch.woff2') format('woff2'),
-		url('/fonts/sohne/Sohne-Buch.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/sohne/Sohne-Buch.woff2') format('woff2'),
+		url('/2024-luong-graphical-models/fonts/sohne/Sohne-Buch.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Sohne';
 	font-weight: 500;
 	font-style: normal;
-	src: url('/fonts/sohne/Sohne-Kraftig.woff2') format('woff2'),
-		url('/fonts/sohne/Sohne-Kraftig.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/sohne/Sohne-Kraftig.woff2') format('woff2'),
+		url('/2024-luong-graphical-models/fonts/sohne/Sohne-Kraftig.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Sohne';
 	font-weight: 600;
 	font-style: normal;
-	src: url('/fonts/sohne/Sohne-Halbfett.woff2') format('woff2'),
-		url('/fonts/sohne/Sohne-Halbfett.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/sohne/Sohne-Halbfett.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/sohne/Sohne-Halbfett.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Sohne Mono';
 	font-weight: 400;
 	font-style: normal;
-	src: url('/fonts/sohne/SohneMono-Buch.woff2') format('woff2'),
-		url('/fonts/sohne/SohneMono-Buch.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/sohne/SohneMono-Buch.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/sohne/SohneMono-Buch.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Sohne Mono';
 	font-weight: 500;
 	font-style: normal;
-	src: url('/fonts/sohne/SohneMono-Kraftig.woff2') format('woff2'),
-		url('/fonts/sohne/SohneMono-Kraftig.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/sohne/SohneMono-Kraftig.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/sohne/SohneMono-Kraftig.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Sohne Mono';
 	font-weight: 700;
 	font-style: normal;
-	src: url('/fonts/sohne/SohneMono-Fett.woff2') format('woff2'),
-		url('/fonts/sohne/SohneMono-Fett.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/sohne/SohneMono-Fett.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/sohne/SohneMono-Fett.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Founders Grotesque X-Cond';
 	font-weight: 400;
 	font-style: normal;
-	src: url('/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Regular.woff2')
+	src: url('/2024-luong-graphical-models/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Regular.woff2')
 			format('woff2'),
-		url('/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Regular.woff')
+		url('/2024-luong-graphical-models/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Regular.woff')
 			format('woff');
 }
 
@@ -60,9 +64,9 @@
 	font-family: 'Founders Grotesque X-Cond';
 	font-weight: 600;
 	font-style: normal;
-	src: url('/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-SemiBold.woff2')
+	src: url('/2024-luong-graphical-models/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-SemiBold.woff2')
 			format('woff2'),
-		url('/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-SemiBold.woff')
+		url('/2024-luong-graphical-models/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-SemiBold.woff')
 			format('woff');
 }
 
@@ -70,9 +74,9 @@
 	font-family: 'Founders Grotesque X-Cond';
 	font-weight: 700;
 	font-style: normal;
-	src: url('/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Bold.woff2')
+	src: url('/2024-luong-graphical-models/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Bold.woff2')
 			format('woff2'),
-		url('/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Bold.woff')
+		url('/2024-luong-graphical-models/fonts/founders-grotesque-x-cond/FoundersGrotesqueXCond-Bold.woff')
 			format('woff');
 }
 
@@ -81,8 +85,10 @@
 	font-family: 'Roboto Mono';
 	font-weight: 400;
 	font-style: normal;
-	src: url('/fonts/roboto-mono/RobotoMono-Regular-Greek.woff2') format('woff2'),
-		url('/fonts/roboto-mono/RobotoMono-Regular-Greek.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/roboto-mono/RobotoMono-Regular-Greek.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/roboto-mono/RobotoMono-Regular-Greek.woff')
+			format('woff');
 	unicode-range: U+0391-03a9, U+03b1-03c9;
 }
 
@@ -90,8 +96,10 @@
 	font-family: 'Roboto Mono';
 	font-weight: 500;
 	font-style: normal;
-	src: url('/fonts/roboto-mono/RobotoMono-Medium-Greek.woff2') format('woff2'),
-		url('/fonts/roboto-mono/RobotoMono-Medium-Greek.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/roboto-mono/RobotoMono-Medium-Greek.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/roboto-mono/RobotoMono-Medium-Greek.woff')
+			format('woff');
 	unicode-range: U+0391-03a9, U+03b1-03c9;
 }
 
@@ -99,9 +107,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 400;
 	font-style: normal;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Regular.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Regular.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Regular.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Regular.woff')
 			format('woff');
 }
 
@@ -109,9 +117,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 400;
 	font-style: italic;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-RegularItalic.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-RegularItalic.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-RegularItalic.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-RegularItalic.woff')
 			format('woff');
 }
 
@@ -119,9 +127,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 500;
 	font-style: normal;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Medium.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Medium.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Medium.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Medium.woff')
 			format('woff');
 }
 
@@ -129,9 +137,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 500;
 	font-style: italic;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-MediumItalic.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-MediumItalic.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-MediumItalic.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-MediumItalic.woff')
 			format('woff');
 }
 
@@ -139,9 +147,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 600;
 	font-style: normal;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Semibold.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Semibold.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Semibold.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Semibold.woff')
 			format('woff');
 }
 
@@ -149,9 +157,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 600;
 	font-style: italic;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-SemiboldItalic.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-SemiboldItalic.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-SemiboldItalic.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-SemiboldItalic.woff')
 			format('woff');
 }
 
@@ -159,9 +167,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 700;
 	font-style: normal;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Bold.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Bold.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Bold.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-Bold.woff')
 			format('woff');
 }
 
@@ -169,9 +177,9 @@
 	font-family: 'Domaine Display Condensed';
 	font-weight: 700;
 	font-style: italic;
-	src: url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-BoldItalic.woff2')
+	src: url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-BoldItalic.woff2')
 			format('woff2'),
-		url('/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-BoldItalic.woff')
+		url('/2024-luong-graphical-models/fonts/domaine-display-x-condensed/DomaineDisplayCondensed-BoldItalic.woff')
 			format('woff');
 }
 
@@ -179,46 +187,58 @@
 	font-family: 'Domaine Text';
 	font-weight: 400;
 	font-style: normal;
-	src: url('/fonts/domaine-text/DomaineText-Regular.woff2') format('woff2'),
-		url('/fonts/domaine-text/DomaineText-Regular.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-Regular.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-Regular.woff')
+			format('woff');
 }
 
 @font-face {
 	font-family: 'Domaine Text';
 	font-weight: 400;
 	font-style: italic;
-	src: url('/fonts/domaine-text/DomaineText-RegularItalic.woff2') format('woff2'),
-		url('/fonts/domaine-text/DomaineText-RegularItalic.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-RegularItalic.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-RegularItalic.woff')
+			format('woff');
 }
 
 @font-face {
 	font-family: 'Domaine Text';
 	font-weight: 500;
 	font-style: normal;
-	src: url('/fonts/domaine-text/DomaineText-Medium.woff2') format('woff2'),
-		url('/fonts/domaine-text/DomaineText-Medium.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-Medium.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-Medium.woff')
+			format('woff');
 }
 
 @font-face {
 	font-family: 'Domaine Text';
 	font-weight: 500;
 	font-style: italic;
-	src: url('/fonts/domaine-text/DomaineText-MediumItalic.woff2') format('woff2'),
-		url('/fonts/domaine-text/DomaineText-MediumItalic.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-MediumItalic.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-MediumItalic.woff')
+			format('woff');
 }
 
 @font-face {
 	font-family: 'Domaine Text';
 	font-weight: 700;
 	font-style: normal;
-	src: url('/fonts/domaine-text/DomaineText-Bold.woff2') format('woff2'),
-		url('/fonts/domaine-text/DomaineText-Bold.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-Bold.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-Bold.woff')
+			format('woff');
 }
 
 @font-face {
 	font-family: 'Domaine Text';
 	font-weight: 700;
 	font-style: italic;
-	src: url('/fonts/domaine-text/DomaineText-BoldItalic.woff2') format('woff2'),
-		url('/fonts/domaine-text/DomaineText-BoldItalic.woff') format('woff');
+	src: url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-BoldItalic.woff2')
+			format('woff2'),
+		url('/2024-luong-graphical-models/fonts/domaine-text/DomaineText-BoldItalic.woff')
+			format('woff');
 }
