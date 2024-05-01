@@ -14,7 +14,7 @@ const config: GatsbyConfig = {
   siteMetadata: {
     lang: 'en-US',
     dir: 'ltr',
-    siteUrl: 'https://graphical-models.netlify.app/',
+    siteUrl: 'https://www.journalovi.org/2024-luong-graphical-models',
     title: 'Learning What’s in a Name with Graphical Models',
     description:
       'We explore three sequence models that are remarkably successful at named entity recognition: Hidden markov Models (HMMs), Maximum-Entropy Markov Models (MEMMs), and Conditional Random Fields (CRFs)',

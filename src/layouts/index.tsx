@@ -12,8 +12,6 @@ import useMountEffect from '@utils/useMountEffect'
 import GlobalStyles from './globalStyles'
 import Nav from './nav'
 
-import './fontFaces.css'
-
 export const PAGE_CONTENT_ID = 'page-content'
 
 type Props = {

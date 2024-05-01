@@ -13,13 +13,13 @@ const HTML = (props: HTMLProps) => {
   return (
     <html lang="en" {...props.htmlAttributes}>
       <head>
-        <base href="/2024-luong-graphical-models/" />
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
         />
+        <link rel="stylesheet" href="fonts.css" />
         <link rel="stylesheet" href="katex.min.css" />
         {props.headComponents}
         <script
