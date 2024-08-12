@@ -21,7 +21,7 @@ const Footer = () => {
 				<FooterSectionContent>
 					<strong>Models:</strong> Jupyter notebooks for training and validating the three
 					models mentioned in this article are availabe{' '}
-					<a href="https://osf.io/hvma6/" target="_blank" rel="noopener noreferrer">
+					<a href="https://osf.io/5zwe9/" target="_blank" rel="noopener noreferrer">
 						on OSF.
 					</a>
 				</FooterSectionContent>
