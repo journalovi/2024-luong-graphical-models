@@ -32,7 +32,15 @@ const Footer = () => {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						CoNLL-2003 dataset.
+						CoNLL-2003 dataset,
+					</a>{' '}
+					available for download{' '}
+					<a
+						href="https://data.deepai.org/conll2003.zip"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						here.
 					</a>
 				</FooterSectionContent>
 			</FooterSectionWrap>
