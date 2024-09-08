@@ -22,6 +22,7 @@
   },
   {
     "author": [{ "family": "Pearl", "given": "Judea" }],
+    "DOI": "10.1016/C2009-0-27609-4",
     "id": "Pearl1988",
     "ISBN": "1558604790",
     "issued": { "date-parts": [[1988]] },
@@ -140,6 +141,7 @@
   {
     "author": [{ "family": "Viterbi", "given": "A." }],
     "container-title": "IEEE Transactions on Information Theory",
+    "DOI": "10.1109/TIT.1967.1054010",
     "id": "Viterbi1967",
     "issue": 2,
     "issued": { "date-parts": [[1967]] },
@@ -167,6 +169,7 @@
       { "family": "De Meulder", "given": "Fien" }
     ],
     "container-title": "Proceedings of the Seventh Conference on Natural Language Learning at HLT-NAACL 2003",
+    "DOI": "10.48550/arXiv.cs/0306050",
     "id": "Sang2003",
     "issued": { "date-parts": [[2003]] },
     "page": "142-147",
@@ -370,14 +373,14 @@
       { "family": "McCallum", "given": "Andrew" }
     ],
     "container-title": "Proceedings of the Human Language Technology Conference of the North American Chapter of the Association for Computational Linguistics: HLT-NAACL 2004",
+    "DOI": "10.1016/j.ipm.2005.09.002",
     "id": "Peng2004",
     "issued": { "date-parts": [[2004]] },
     "page": "329-336",
     "publisher": "Association for Computational Linguistics",
     "publisher-place": "Boston, Massachusetts, USA",
     "title": "Accurate Information Extraction from Research Papers using Conditional Random Fields",
-    "type": "paper-conference",
-    "URL": "https://aclanthology.org/N04-1042"
+    "type": "paper-conference"
   },
   {
     "author": [
@@ -416,6 +419,7 @@
       { "family": "Gopalakrishnan", "given": "Vanathi" }
     ],
     "container-title": "J. Comput. Biol.",
+    "DOI": "10.1089/cmb.2006.13.394",
     "id": "Liu2006",
     "issue": 2,
     "issued": { "date-parts": [[2006, 3]] },
