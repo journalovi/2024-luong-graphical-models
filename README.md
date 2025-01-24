@@ -1,5 +1,10 @@
 ```diff
 ! This paper is under review on the experimental track of the Journal of Visualization and Interaction.
+
+R1 : cy99vis
+R2 : joviewer-xyz
+R3 : msedl
+
 ```
 
 # Graphical Models
