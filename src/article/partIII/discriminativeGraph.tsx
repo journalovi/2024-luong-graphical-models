@@ -25,8 +25,8 @@ const createGraph = (shortForm: boolean, xDelta: number) => {
 	for (let i = SStart; i < SStart + SLength; i++) {
 		const xPosition = (i - SStart - (SLength - 1) / 2) * xDelta
 
-		const s = new Node({ label: S[i], x: xPosition, y: -30 })
-		const o = new Node({ label: O[i], x: xPosition, y: 30 })
+		const s = new Node({ label: S[i], x: xPosition, y: 30 })
+		const o = new Node({ label: O[i], x: xPosition, y: -30 })
 
 		graph.addNode(s)
 		graph.addNode(o)

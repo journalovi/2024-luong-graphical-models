@@ -56,7 +56,8 @@ In this article, we’ll explore three sequence models that are remarkably succe
 			Which of these words refer to a&nbsp;
 			<abbr title="A person, organization, location, or other (miscellaneous)">
 				<span>named entity</span>
-			</abbr>?
+			</abbr>
+			?
 		</Fragment>
 	}
 />
@@ -109,7 +110,7 @@ For more detailed accounts of probabilistic graphical models, consider reading t
 
 ## II. Hidden Markov Models
 
-Hidden Markov Models (HMMs) are an early class of probabilistic graphical models representing partially hidden (unobserved) sequences of events. Structurally, they are built with two main layers, one hidden ($S_i$) and one observed ($O_i$):
+Hidden Markov Models (HMMs) are an early class of probabilistic graphical models representing partially hidden (unobserved) sequences of events. Structurally, they are built with two main layers, one observed ($O_i$) and one hidden ($S_i$):
 
 <HMMOverviewGraph />
 
@@ -141,7 +142,7 @@ The assumptions about the hidden layer — Markov and time-homogeneity — hold 
 
 ### The Observed Layer
 
-The hidden and observed layers are connected via a one-to-one mapping. We assume the probability of each observation depends only on the state of the hidden event at the same time step. Given a sequence of $N$ hidden events $S_1$, $S_2$,…, $S_N$ and observed events $O_1$, $O_2$,…, $O_N$ we have:
+The hidden and observed layers are connected via a one-to-one mapping. We assume the probability of each observation depends only on the state of the hidden event at the same time step. Given a sequence of $N$ observed events $O_1$, $O_2$,…, $O_N$ and $N$ hidden events $S_1$, $S_2$,…, $S_N$ we have:
 
 $$
 p(o_i | s_1, s_2,…, s_N) = p(o_i | s_i) \\

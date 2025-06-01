@@ -263,20 +263,6 @@ const MEMMFeatureBreakdown = () => {
 							<StyledGuideArrow from="left" to="right" strokeWidth="2" height={16} />
 						</PrevTagWrap>
 						<CurrentTagWrap>
-							<SelectWrap>
-								<SelectField
-									small
-									skipFieldWrapper
-									value={currentTag}
-									onChange={setCurrentTag}
-									aria-label="Current name tag"
-								>
-									{nameTags.map((tag) => (
-										<Item key={tag}>{tag}</Item>
-									))}
-								</SelectField>
-							</SelectWrap>
-							<StyledGuideArrow from="bottom" to="top" strokeWidth="2" width={16} />
 							<WordInputWrap>
 								<SelectField
 									small
@@ -290,6 +276,20 @@ const MEMMFeatureBreakdown = () => {
 									))}
 								</SelectField>
 							</WordInputWrap>
+							<StyledGuideArrow from="top" to="bottom" strokeWidth="2" width={16} />
+							<SelectWrap>
+								<SelectField
+									small
+									skipFieldWrapper
+									value={currentTag}
+									onChange={setCurrentTag}
+									aria-label="Current name tag"
+								>
+									{nameTags.map((tag) => (
+										<Item key={tag}>{tag}</Item>
+									))}
+								</SelectField>
+							</SelectWrap>
 						</CurrentTagWrap>
 					</InputWrap>
 					{breakdownContent}
@@ -321,7 +321,7 @@ const LongEm = styled.span`
 
 const InputWrap = styled.div`
 	display: flex;
-	align-items: start;
+	align-items: end;
 	justify-content: center;
 	border-radius: var(--border-radius-m);
 

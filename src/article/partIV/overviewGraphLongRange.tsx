@@ -21,8 +21,8 @@ const createGraph = (nStates: number, xDelta: number) => {
 		const xPosition = (i - 1.5) * xDelta
 		const subscript = String.fromCodePoint(0x2080 + i + 1)
 
-		const state = new Node({ label: `S${subscript}`, x: xPosition, y: -30 })
-		const observation = new Node({ label: `O${subscript}`, x: xPosition, y: 30 })
+		const state = new Node({ label: `S${subscript}`, x: xPosition, y: 30 })
+		const observation = new Node({ label: `O${subscript}`, x: xPosition, y: -30 })
 
 		graph.addNode(state)
 		graph.addNode(observation)

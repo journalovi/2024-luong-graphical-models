@@ -40,25 +40,25 @@ const HMMEmissionPaths = ({ label }: { label: string }) => {
 						>
 							<Fragment>
 								<g>
-									{states.map((state, stateIndex) => {
-										const x = (-(states.length - 1) / 2 + stateIndex) * xDelta
-
-										return (
-											<text key={stateIndex} x={x} y={yTop}>
-												{state}
-											</text>
-										)
-									})}
-								</g>
-								<g>
 									{words.map((word, wordIndex) => {
 										const x = (-(words.length - 1) / 2 + wordIndex) * xDelta
 
 										const isMock = wordIndex === 0 || wordIndex === words.length - 1
 
 										return (
-											<text key={wordIndex} x={x} y={yBottom}>
+											<text key={wordIndex} x={x} y={yTop}>
 												{isMock ? '…' : word}
+											</text>
+										)
+									})}
+								</g>
+								<g>
+									{states.map((state, stateIndex) => {
+										const x = (-(states.length - 1) / 2 + stateIndex) * xDelta
+
+										return (
+											<text key={stateIndex} x={x} y={yBottom}>
+												{state}
 											</text>
 										)
 									})}
@@ -82,7 +82,7 @@ const HMMEmissionPaths = ({ label }: { label: string }) => {
 													return (
 														<path
 															key={wordIndex}
-															d={`M ${xSource} ${yTop + 15} L ${xTarget} ${yBottom - 10}`}
+															d={`M ${xSource} ${yBottom - 10} L ${xTarget} ${yTop + 15}`}
 															strokeOpacity={opacity}
 															strokeDasharray={isMock ? '1 4' : 0}
 														/>
