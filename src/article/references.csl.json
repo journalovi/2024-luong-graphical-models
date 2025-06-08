@@ -156,7 +156,20 @@
       { "family": "Martin", "given": "James H." }
     ],
     "container-title": "Speech and Language Processing",
-    "id": "Jurafsky2021",
+    "id": "JurafskyTrain2021",
+    "issued": { "date-parts": [[2021]] },
+    "page": "8-10",
+    "title": "Appendix A.5 — HMM Training: The Forward-Backward Algorithm",
+    "type": "chapter",
+    "URL": "https://web.stanford.edu/~jurafsky/slp3/A.pdf"
+  },
+  {
+    "author": [
+      { "family": "Jurafsky", "given": "Daniel" },
+      { "family": "Martin", "given": "James H." }
+    ],
+    "container-title": "Speech and Language Processing",
+    "id": "JurafskyViterbi2021",
     "issued": { "date-parts": [[2021]] },
     "page": "8-10",
     "title": "Appendix A.4 — Decoding: The Viterbi Algorithm",

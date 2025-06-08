@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Grid from '@components/grid'
 import SegmentedControl, { Item } from '@components/segmentedControl'
 
+import Callout from '../callout'
 import { MODEL, MODEL_SHORT } from '../constants'
 import Heatmap from '../heatmap'
 
@@ -95,7 +96,7 @@ const OOVRateHeatmap = ({ models }: OOVRateHeatmapProps) => {
 	}, [selectedModel, metric])
 
 	return (
-		<Grid>
+		<>
 			<Wrap>
 				<ControlWrap>
 					{models.length > 1 && (
@@ -125,7 +126,12 @@ const OOVRateHeatmap = ({ models }: OOVRateHeatmapProps) => {
 					/>
 				</ContentWrap>
 			</Wrap>
-		</Grid>
+			<StyledCallout>
+				An empty cell means either it is impossible (e.g. a two-word entity can’t have an
+				OOV rate of 0.25) or there were not enough (fewer than five) relevant entities to
+				form a reliable score.
+			</StyledCallout>
+		</>
 	)
 }
 
@@ -137,7 +143,6 @@ const Wrap = styled.div`
 	align-items: center;
 	${(p) => p.theme.gridColumn.text};
 	margin-top: var(--adaptive-space-1);
-	margin-bottom: var(--adaptive-space-3);
 	gap: var(--space-1-5);
 	max-width: 32rem;
 	contain: content;
@@ -152,4 +157,8 @@ const ControlWrap = styled.div`
 const ContentWrap = styled.div`
 	position: relative;
 	width: 100%;
+`
+
+const StyledCallout = styled(Callout)`
+	margin-bottom: var(--adaptive-space-3);
 `

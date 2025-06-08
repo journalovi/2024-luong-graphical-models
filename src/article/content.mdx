@@ -78,8 +78,8 @@ $$
 
 {
 
-<Callout title="Notation:">
-	the shorthand <em>p(a)</em> means <em>p(A = a)</em>, that is, the probability of
+<Callout>
+	The shorthand <em>p(a)</em> means <em>p(A = a)</em>, that is, the probability of
 	variable A taking value a.
 </Callout>
 }
@@ -129,7 +129,7 @@ In a graph, this translates to a linear chain of events where each event has one
 
 <HMMTransitionGraph />
 
-A second assumption that HMMs make is time-homogeneity: that the probability of transition from one event's state to the next is constant over time. In formal terms:
+A second assumption that HMMs make is time-homogeneity: that the probability of transitioning from one state to the next is independent of time. For example, if the last state was “O”, then the probability of the current state being “B-LOC” is the same value $p(\text{B-LOC}|\text{O})$ regardless of what time step $i$ we are at. In formal terms:
 
 $$
 p(s_i | s_{i-1}) = p(s_{i+1} | s_i) \\
@@ -163,8 +163,8 @@ HMMs’ chain structure is particularly useful in sequence labeling problems lik
 
 {
 
-<Callout title="Representation:">
-	rather than labeling each node using the name of the variable it represents (X&#8321;,
+<Callout>
+	Rather than labeling each node using the name of the variable it represents (X&#8321;,
 	Y&#8321;) as we have until this point, we'll instead display the value of that variable
 	(“O”, “Great”). This helps make the graphs easier to read.
 </Callout>
@@ -172,7 +172,7 @@ HMMs’ chain structure is particularly useful in sequence labeling problems lik
 
 There are 9 possible name tags. Each, apart from the “O” tag, has either a B- (beginning) or I- (inside) prefix, to eliminate confusion about when an entity stops and the next one begins.
 
-Between any two consecutive hidden states, there are 9&#178; = 81 possible transitions. Each transition has its own probability, $p(x_i|x_{i-1})$:
+Between any two consecutive hidden states, there are 9&#178; = 81 possible transitions. Each transition has its own probability, $p(s_i|s_{i-1})$:
 
 <HMMTransitionPaths
 	nStates={2}
@@ -181,23 +181,23 @@ Between any two consecutive hidden states, there are 9&#178; = 81 possible trans
 
 In the observed layer, each node can have any value from the vocabulary, whose size ranges anywhere from the thousands to the hundreds of thousands. The vocabulary created for the HMM in this article contains 23,622 tokens. Let N be the number of tokens in the vocabulary. The number of possible emission probabilities is 9N ($n_{states} \cdot n_{tokens}$).
 
-<HMMEmissionPaths label="Higher opacity indicates higher relative probability." />
+<HMMEmissionPaths label="Higher opacity indicates higher relative probability. Dashed lines are used for emission paths to other words in the vocabulary." />
 
 ### Training
 
-There are three sets of parameters to be learned during training: the transition, emission, and start probabilities. All can be computed as normalized rates of occurrence from the training data.
+There are three sets of parameters to be learned during training: the transition, emission, and start probabilities. When the hidden states are known in the training set, which is the case with CoNLL-2003, all three can be computed as normalized rates of occurrence from the training data. For example, to get the transition probability from state “O” to state “B-LOC”, $p(\text{B-LOC}|\text{O})$, we need two numbers: the number of times state “O” is followed by any other state (that is, it isn't the last state in the sequence), as $N_\text{O}$, and the number of times state “O” is followed by state “B-LOC”, as $N_\text{O→B-LOC}$. The desired transition probability is $\frac{N_\text{O→B-LOC}}{N_\text{O}}$. The same calculation can be done for each of the remaining probabilities.
 
-For example, to get the transition probability from state “O” to state “B-LOC”, $p(B{-}LOC | O)$, we need two numbers: the number of times state “O” is followed by any other state (that is, it isn't the last state in the sequence), as $N_O$, and the number of times state “O” is followed by state “B-LOC”, as $N_{O→B-LOC}$. The desired transition probability is $\frac{N_{O→B-LOC}}{N_O}$. The same calculation can be done for each of the remaining probabilities.
+If however the hidden states are unknown, then the standard approach is to use the Baum-Welch (forward-backward) algorithm. Baum-Welch is an iterative algorithm, where we start with an initial estimate of the probabilities to be learned and use them to compute progressively better estimates. An excellent explanation of the algorithm can be found in the the book Speech and Language Processing by Jurafsky & Martin [@JurafskyTrain2021].
 
 ### Inference
 
 In the context of HMMs, inference involves answering useful questions about hidden states given observed values, or about missing values given a partially-observed sequence. In NER, we are focused on the first type of inference. Specifically, we want to perform maximum a posteriori (MAP) inference to identify the most likely state sequence conditioned on observed values.
 
-There is usually an intractably large number of candidate state sequences. For any two consecutive states, there are 81 potential transition paths. For three states there are 82&#178; paths. This number continues to grow exponentially as the number of states increases.
+There is usually an intractably large number of candidate state sequences. For any two consecutive states, there are 9&#178; = 81 potential transition paths. For three states there are 9&#179; = 729 paths. This number continues to grow exponentially as the number of states increases.
 
 <HMMTransitionPaths nStates={4} />
 
-Luckily, there is an efficient dynamic algorithm that returns the most likely path with relatively low computational complexity: the Viterbi algorithm [@Viterbi1967]. It moves through the input sequence from left to right, at each step identifying and saving the most likely path in a trellis-shaped memory structure. For more details, refer to the excellent description of the Viterbi algorithm in the book, _Speech and Language Processing_ by Jurafsky & Martin [@Jurafsky2021].
+Luckily, there is an efficient dynamic algorithm that returns the most likely path with relatively low computational complexity: the Viterbi algorithm [@Viterbi1967]. It moves through the input sequence from left to right, at each step identifying and saving the most likely path in a trellis-shaped memory structure. For more details, refer to the Jurafsky & Martin book [@JurafskyViterbi2021].
 
 ### Results
 
@@ -219,7 +219,7 @@ However, precision and recall — calculated per entity [@Sang2003] — are deci
 
 These metrics are lower than per-word accuracy because they are entity-level evaluations that count only exact matches as true positives. Long, multi-word entities are considered incorrect if one or more of their constituent words are misidentified, in effect, ignoring the other correctly identified words in the entity.
 
-A closer look at the results reveals a discrepancy between entities with known words and those with at least one out-of-vocabulary (OOV) words:
+A closer look at the results reveals a discrepancy between entities with known words versus those containing at least one out-of-vocabulary (OOV) word. It is common for proper names to contain one or more OOV words, such as the "Pertile" in "Javier Pertile". Both precision and recall are significantly worse in those cases:
 
 <BinaryOOVHeatmap models={['hmm']} />
 
@@ -231,7 +231,7 @@ HMMs are by no means perfect candidates for NER or text labeling problems in gen
 
 First is the Markov assumption. We don't compose words and their respective labels (“Noun”, “Adjective”, “B-ORG”, “I-ORG”) in a tidy, unidirectional manner. A word may link to another word many positions in the sentence before or after. In “South African Breweries Ltd”, both “South African” and “Ltd” provide crucial context to “Breweries”, which would otherwise register as not a name. HMMs fail to capture these tangled interdependencies, instead assuming that information passes from left to right in a single, neat chain.
 
-An indication, although it is by no means proof, of such limitation lies in the fast deterioration of the precision score as the entity length — counted as the number of tokens inside each entity — increases (the recall scores are much more noisy and thus less conclusive):
+An indication of such limitation lies in the fast deterioration of the precision score as the entity length — counted as the number of tokens inside each entity — increases (the recall scores are much more noisy and thus less conclusive):
 
 <EntityLengthHeatmap models={['hmm']} />
 
@@ -239,7 +239,7 @@ The second reason why HMMs fail to do well on text labeling problems is the emis
 
 Semantic and grammatical rules may restrict the range of words that can appear in any given observation, but those restrictions are far from the strong emissions assumption made by HMMs. Beyond the current word label, there is a host of other factors that, together, help determine which words are chosen. Additionally, while there is a link between part-of-speech tags and the words that are chosen, that link is less clear with name tags.
 
-The third reason: HMMs rely solely on word identity in the observed layer. There are various word features that can provide additional information on the hidden label. Capitalization is a strong signal of named entities. Word shape may help account for common name patterns. HMMs take none of these features into account (in fact, they can’t: their generative chain structure requires that all observations be independent of each other).
+The third reason: HMMs rely solely on word identity (the exact characters that make up the word) in the observed layer. There are various word features that can provide additional information on the hidden label. Capitalization is a strong signal of named entities. Word shape may help account for common name patterns. HMMs take none of these features into account (in fact, they can’t: their generative chain structure requires that all observations be independent of each other).
 
 Since the only information available are word identities, HMMs falter on out-of-vocabulary words. While the models can wring bits of useful information out of nearby predicted name tags — the Viterbi algorithm maximizes likelihood over the whole sequence — the results are nonetheless discouraging:
 

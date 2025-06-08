@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Grid from '@components/grid'
 import SegmentedControl, { Item } from '@components/segmentedControl'
 
+import Callout from '../callout'
 import { MODEL, MODEL_SHORT } from '../constants'
 import Heatmap from '../heatmap'
 
@@ -88,7 +89,7 @@ const EntityLengthHeatmap = ({ models }: EntityLengthHeatmapProps) => {
 	}, [selectedModel, metric])
 
 	return (
-		<Grid>
+		<>
 			<Wrap>
 				<ControlWrap>
 					{models.length > 1 && (
@@ -111,7 +112,12 @@ const EntityLengthHeatmap = ({ models }: EntityLengthHeatmapProps) => {
 					<Heatmap data={data} groups={groups} groupLabel="Entity Length" />
 				</ContentWrap>
 			</Wrap>
-		</Grid>
+			<StyledCallout>
+				An empty cell means there were not enough (fewer than five) relevant entities.
+				E.g. in the precision tab, there were not enough entities predicted to be a
+				location name that were five words long.
+			</StyledCallout>
+		</>
 	)
 }
 
@@ -123,7 +129,6 @@ const Wrap = styled.div`
 	align-items: center;
 	${(p) => p.theme.gridColumn.text};
 	margin-top: var(--adaptive-space-1);
-	margin-bottom: var(--adaptive-space-3);
 	gap: var(--space-1-5);
 	max-width: 32rem;
 	contain: content;
@@ -140,4 +145,8 @@ const ControlWrap = styled.div`
 const ContentWrap = styled.div`
 	position: relative;
 	width: 100%;
+`
+
+const StyledCallout = styled(Callout)`
+	margin-bottom: var(--adaptive-space-3);
 `

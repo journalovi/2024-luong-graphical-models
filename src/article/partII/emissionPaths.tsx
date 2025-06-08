@@ -115,7 +115,7 @@ export default HMMEmissionPaths
 const StyledGrid = styled(Grid)`
 	${(p) => p.theme.flexCenter}
 	contain: strict;
-	height: 15rem;
+	height: 16rem;
 	margin-top: var(--adaptive-space-1);
 	margin-bottom: var(--adaptive-space-3);
 `

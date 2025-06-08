@@ -35,13 +35,21 @@ const HMMTransitionPaths = ({ nStates, label }: { nStates: number; label?: strin
 								const xStart = (-(nStates - 1) / 2 + layerIndex) * xDelta
 								const xEnd = (-(nStates - 1) / 2 + layerIndex + 1) * xDelta
 
-								const yDelta = height / states.length
+								const yDelta = height / (states.length + 1) // add one for state label
 
 								return (
 									<Fragment key={layerIndex}>
 										<g>
+											<text x={xStart} y={(-states.length / 2) * yDelta - 4}>
+												s
+												<tspan dy="0.5em">
+													i
+													{layerIndex !== 1 &&
+														(layerIndex - 1 > 0 ? `+${layerIndex - 1}` : layerIndex - 1)}
+												</tspan>
+											</text>
 											{states.map((state, stateIndex) => {
-												const y = (-(states.length - 1) / 2 + stateIndex) * yDelta
+												const y = (-states.length / 2 + stateIndex + 1) * yDelta
 
 												return (
 													<text key={stateIndex} x={xStart} y={y}>
@@ -54,13 +62,13 @@ const HMMTransitionPaths = ({ nStates, label }: { nStates: number; label?: strin
 											<g>
 												{states.map((sourceState, sourceStateIndex) => {
 													const ySource =
-														(-(states.length - 1) / 2 + sourceStateIndex) * yDelta
+														(-states.length / 2 + sourceStateIndex + 1) * yDelta
 
 													return (
 														<g key={sourceStateIndex}>
 															{states.map((targetState, targetStateIndex) => {
 																const yTarget =
-																	(-(states.length - 1) / 2 + targetStateIndex) * yDelta
+																	(-states.length / 2 + targetStateIndex + 1) * yDelta
 
 																const opacity = probabilityToOpacity(
 																	transitionProbabilities[sourceStateIndex][
@@ -110,7 +118,7 @@ export default HMMTransitionPaths
 const StyledGrid = styled(Grid)`
 	${(p) => p.theme.flexCenter}
 	contain: strict;
-	height: 17rem;
+	height: 18rem;
 	margin-top: var(--adaptive-space-1);
 	margin-bottom: var(--adaptive-space-3);
 `
@@ -122,7 +130,7 @@ const Wrap = styled.div`
 
 const InnerWrap = styled.div`
 	position: relative;
-	height: 14rem;
+	height: 15rem;
 	margin-bottom: var(--space-1);
 `
 
@@ -134,6 +142,13 @@ const SVG = styled.svg`
 		fill: var(--color-body);
 		text-anchor: middle;
 		transform: translateY(0.35em);
+		&:first-child {
+			font-weight: 500;
+			fill: var(--color-label);
+		}
+		tspan {
+			font-size: 0.75em;
+		}
 	}
 
 	path {
