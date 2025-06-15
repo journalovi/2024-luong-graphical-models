@@ -11,13 +11,15 @@ import GraphView from '../graph/view'
 const createGraph = () => {
 	const graph = new Graph()
 
-	const nodeA = new Node({ label: 'A', x: -40, y: -33 })
-	const nodeB = new Node({ label: 'B', x: 40, y: -33 })
-	const nodeC = new Node({ label: 'C', x: 0, y: 33 })
+	const nodeA = new Node({ label: 'A', x: -80, y: -33 })
+	const nodeB = new Node({ label: 'B', x: 0, y: -33 })
+	const nodeC = new Node({ label: 'C', x: -40, y: 33 })
+	const nodeD = new Node({ label: 'D', x: 40, y: 33 })
 
 	graph.addNode(nodeA)
 	graph.addNode(nodeB)
 	graph.addNode(nodeC)
+	graph.addNode(nodeD)
 
 	graph.addEdge(
 		new Edge({

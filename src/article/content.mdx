@@ -238,7 +238,7 @@ An indication of such limitation lies in the fast deterioration of the precision
 
 The second reason why HMMs fail to do well on text labeling problems is the emissions assumption. When composing sentences, we don’t go about forming a chain of labels (such as “B-ORG” – “I-ORG” – “I-ORG” – “O”…) before generating words from each label in that chain.
 
-Semantic and grammatical rules may restrict the range of words that can appear in any given observation, but those restrictions are far from the strong emissions assumption made by HMMs. Beyond the current word label, there is a host of other factors that, together, help determine which words are chosen. Additionally, while there is a link between part-of-speech tags and the words that are chosen, that link is less clear with name tags.
+Semantic and grammatical rules may restrict the range of words that can appear in any given observation, but those restrictions are far from the strong emissions assumption made by HMMs. Beyond the current word label, there is a host of other features that, together, help determine which words are chosen. Additionally, while there is a link between part-of-speech tags and the words that are chosen, that link is less clear with name tags.
 
 The third reason: HMMs rely solely on word identity (the exact characters that make up the word) in the observed layer. There are various word features that can provide additional information on the hidden label. Capitalization is a strong signal of named entities. Word shape may help account for common name patterns. HMMs take none of these features into account (in fact, they can’t: their generative chain structure requires that all observations be independent of each other).
 
@@ -270,7 +270,7 @@ HMMs are generative classifiers, while MEMMs are discriminative. The former are 
 
 ### Word Features
 
-Notably, MEMMs’ discriminative structure allows them to model overlapping word features. Two features can overlap when they contain the same or similar pieces of information, like capitalization and word shape (e.g. “Xxxx” — four-letter words where the first character is capitalized). HMMs don’t permit overlapping features, since as a result of their generative structure they require that all events in the observation layer be independent of one another. MEMMs, on the other hand, are discriminative and able to relax the independence requirement, so they can use arbitrary overlapping features [@McCallum2000].
+A major advantage of MEMMs’ discriminative structure is that it permits overlapping word features as inputs. Two features can overlap when they contain the same or similar pieces of information, such as capitalization and word shape (e.g. “Xxxx”, for four-letter words where the first character is capitalized). HMMs don’t allow overlapping features. As a result of their generative structure, they require that all events in the observation layer be independent of one another. MEMMs, on the other hand, are discriminative and able to relax the independence requirement, so they can use arbitrary overlapping features [@McCallum2000].
 
 Common practice is to represent features as binary functions, such as:
 
@@ -362,7 +362,7 @@ With stronger predictive power on OOV words, we can additionally expect better p
 
 MEMMs’ discriminative structure confers great benefits, but there’s a downside: it makes them susceptible to the label bias problem. First recorded by Bottou [@Bottou1991], this problem mostly affects discriminative models, causing certain states to effectively ignore their observations, biasing predictions toward less likely transition paths. While the label bias problem doesn’t render models useless, it still has a notable effect on predictions, causing demonstrably higher error rates [@Lafferty2001].
 
-What’s important to know is that MEMMs fall victim to the label bias problem because they have local probability normalization. The normalization factor $Z(o, s\prime)$ ensures that transition probabilities between neighboring states sum up to one. Local normalization forces every state to transfer all of its probability mass onto the next state, regardless of how likely or unlikely the current observation is. Hannun [@Hannun2019] provides an excellent, detailed explanation of how this happens.
+What’s important to know is that MEMMs fall victim to the label bias problem because they have local probability normalization. The normalization term $Z(o, s\prime)$ ensures that transition probabilities between neighboring states sum up to one. Local normalization forces every state to transfer all of its probability mass onto the next state, regardless of how likely or unlikely the current observation is. Hannun [@Hannun2019] provides an excellent, detailed explanation of how this happens.
 
 We can consider getting rid of local normalization to avoid the problem. That would lead us to Conditional Random Fields — a class of globally-normalized, undirected probabilistic models, which we’ll cover next.
 
@@ -378,13 +378,13 @@ While CRFs can have any graph structure, in this article we’ll focus on the li
 
 ### Markov Random Fields
 
-CRFs are a type of Markov Random Fields (MRFs) — probability distributions over random variables defined by _undirected_ graphs [@Blake2011]:
+CRFs are a type of Markov Random Fields (MRFs) — probability distributions over random variables described by _undirected_ graphs [@Blake2011], for example:
 
 <CRFRandomFieldGraph />
 
-Undirected graphs are appropriate for when it’s difficult or implausible to establish causal, generative relationships between random variables. Social networks are a good example of undirected relationships. We can think of $A$, $B$, and $C$ in the graph above as people in a simple network. $A$ and $B$ are friends and tend to share similar beliefs. The same goes for $B$ and $C$ as well as $C$ and $A$. We might, for example, want to model how each person in the network thinks about a specific topic.
+Undirected graphs are appropriate when it’s difficult or implausible to establish causal, generative relationships between random variables. Social networks are a good example of undirected relationships. We can think of $A$, $B$, $C$, and $D$ in the graph above as people in a simple network. $A$ and $B$ are friends and tend to share similar beliefs. The same goes for $B$ and $C$ as well as $C$ and $A$. We might, for example, want to model how each person in the network thinks about a specific topic.
 
-Acyclic Directed graphs fail to adequately represent the mutual belief propagation that occurs within the group. For example, we might have an edge from $A$ to $B$ but no path from $B$ back to $A$ — there will always be at least one such exclusion in an acyclic directed graph.
+Acyclic Directed Graphs fail to adequately represent the mutual belief propagation that occurs within the group. For example, we might have an edge from $A$ to $B$ but no path from $B$ back to $A$ — there will always be at least one such exclusion in an acyclic directed graph.
 
 Rather than assuming a generative relationship between variables, MRFs model their mutual relationships with non-negative scoring functions $\phi$, called _factors_, that assign higher scores if the variables’ values are in agreement, for example:
 
@@ -396,32 +396,36 @@ $$
 	\end{cases}
 $$
 
-Unlike conditional probabilities, there is no assumed directionality in scoring functions. These functions simply return higher scores if the variables agree and lower scores if they disagree. They model pairwise correlation, not causation.
+Unlike conditional probabilities, there is no assumed directionality in scoring functions. These functions simply return higher scores if the variables “agree” and lower scores if they “disagree” with one another. They model pairwise correlation, not causation.
 
-The joint probability of all variables in the graph is:
+The joint probability of all variables in the graph is defined as:
 
 $$
-p(A,B,C) = \frac{1}{Z}\,\phi(A,B)\,\phi(B,C)\,\phi(C,A) \\
+p(A,B,C,D) = \frac{1}{Z}\,\phi(A,B)\,\phi(B,C)\,\phi(C,A) \\
 \footnotesize\textrm{where Z is a normalization factor}
 $$
 
-The factors $\phi$ promote assignments in which their constituent variables ($A$ and $B$ in the case of $\phi(A, B)$) agree with each other. The assignment 1-1-1 would receive a higher score and thus have higher probability than say 1-1-0, since there is more agreement in the former case.
+The factors $\phi$ promote assignments in which their constituent variables ($A$ and $B$ in the case of $\phi(A, B)$) agree with each other. The assignment 1-1-1-0 (for $A$, $B$, $C$, and $D$ respectively) would receive a higher score and thus have higher probability than say 1-1-0-0, since there is more agreement in the former case.
+
+Note that $D$ isn’t present in the factorization, which makes intuitive sense. $D$ is separated from $A$, $B$, and $C$ — there is no edge connecting it to those other variables. Extending the social network analogy, $D$ isn’t friends with the trio of $A$, $B$, and $C$, so it isn’t more or less likely to agree with that group (e.g. the assignment 1-1-1-1 is as likely as 1-1-1-0). Given that, it makes sense that the joint probability $p(A,B,C,D)$ does not depend on the value of $D$.
 
 More generally, MRFs are probability distributions $p$ over random variables $x_1$, $x_2$,… that are defined by an undirected graph $\mathcal{G}$ and have the form:
 
 $$
 p(x_1, x_2,…) = \frac{1}{Z}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(x_c)} \\
-\footnotesize\textrm{where Z is a normalization factor} \\
+\footnotesize\textrm{where Z is a normalization term} \\
 \footnotesize\textrm{and C is the set of cliques in $\mathcal{G}$}
 $$
 
-We don’t need to define a factor $\phi_c$ for every clique $c$. We may, for example, skip any clique containing only one node.
+The definition relies on the concept of cliques: groups of nodes in a graph that are fully connected (forming a complete subgraph). $A$, $B$, and $C$ in the example above form a clique, so do $A$ and $B$, $B$ and $C$, and so on. We don’t need to define a factor $\phi_c$ for every clique $c$. We may, for example, skip any clique containing only one node.
+
+Here is an example of how the joint probability is calculated:
 
 <CRFUndirectedGraphExample />
 
 MRFs have a generalized form of which the directed models we’ve seen so far — HMMs and MEMMs — are special cases. The factors $\phi_c$ can be defined as conditional probabilities, for example $\phi_c(x_1,x_2) = p(x_2|x_1)$, and act as the transition and emission probabilities that characterize HMMs and MEMMs.
 
-The additional level of generality comes at a cost, however: the normalization factors $Z$ are often difficult to compute. They require summing over an exponential number of potential assignments, an infeasible task if the network is large enough. Fortunately, there are configurations that can be solved using efficient decoding algorithms. That includes linear-chain CRFs, which can be decoded with the Viterbi algorithm.
+The additional level of generality comes at a cost, however: the normalization term $Z$ is often difficult to compute. They require summing over an exponential number of potential assignments, an infeasible task if the network is large enough. Fortunately, there are configurations that can be solved using efficient decoding algorithms. That includes linear-chain CRFs, which can be decoded with the Viterbi algorithm.
 
 ### Conditional Form
 
@@ -429,7 +433,7 @@ CRFs are random fields globally conditioned on a set of observations $x$ [@Laffe
 
 $$
 p(y|x) = \frac{1}{Z(x)}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(y_c, x_c)} \\
-\footnotesize\textrm{where Z is a normalization factor} \\
+\footnotesize\textrm{where Z is a normalization term} \\
 \footnotesize\textrm{and C is the set of cliques in the} \\
 \footnotesize\textrm{graph $\mathcal{G}$ representing the labels $y$}
 $$
@@ -460,9 +464,9 @@ During training, estimation of the weight vector $\lambda$ is performed by likel
 
 In the case of linear-chain CRFs, inference can be done efficiently using modified versions of the forward, backward, and Viterbi algorithm [@Sutton2010]. Since the distribution $p(y|x)$ is a product of factors $\phi_c$, we can progresively move through the chain, going node to node, adding more factors to the cumulative product. The factors $\phi_c$ play the same role in these algorithms as the transition and emission probabilities of HMMs and MEMMs.
 
-### Label Bias Problem
+### Addressing the Label Bias Problem
 
-Global conditioning on $x$ helps CRFs avoid the label bias problem [@McCallum2000]. The problem mostly affects models with local probability normalization, including MEMMs [@Hannun2019]. CRFs avoid this since they model the probability of the entire state sequence $p(y|x)$, which has a single, global normalization factor $Z$.
+Global conditioning on $x$ helps CRFs avoid the label bias problem [@McCallum2000]. The problem mostly affects models with local probability normalization, including MEMMs [@Hannun2019]. CRFs avoid this since they model the probability of the entire state sequence $p(y|x)$, which has a single, global normalization term $Z$.
 
 CRFs’ robustness against label bias, at least compared to MEMMs, has been well demonstrated in experimental conditions [@McCallum2000]. In practical applications, however, it’s more difficult to capture the presence and effect of label bias due to a myriad of confounding factors. Still, we can rule out potential confounders and try to isolate label bias in our test systems.
 
