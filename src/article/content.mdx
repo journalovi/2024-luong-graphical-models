@@ -17,6 +17,7 @@ import HMMTransitionPaths from './partII/transitionPaths'
 import MEMMDiscriminativeGraph from './partIII/discriminativeGraph'
 import MEMMFeatureBreakdown from './partIII/featureBreakdownLoadable'
 import MEMMMostInformativeFeatures from './partIII/mostInformativeFeatures'
+import MEMMWordShapeExamples from './partIII/wordShapeExamples'
 import MEMMOverviewGraph from './partIII/overviewGraph'
 import MEMMPerEntityScorecards from './partIII/perEntityScorecards'
 import MEMMPerWordScorecard from './partIII/perWordScorecards'
@@ -269,27 +270,31 @@ HMMs are generative classifiers, while MEMMs are discriminative. The former are 
 
 ### Word Features
 
-Notably, MEMMs’ discriminative structure allows them to model overlapping word features. Two features can overlap when they contain the same or similar pieces of information, like word shape (“Xxx”) and capitalization. HMMs don’t allow overlapping features, since as a result of their generative structure they require that all events in the observation layer be independent of one another. MEMMs, on the other hand, are discriminative and able to relax the independence requirement, so they can use arbitrary overlapping word features [@McCallum2000].
+Notably, MEMMs’ discriminative structure allows them to model overlapping word features. Two features can overlap when they contain the same or similar pieces of information, like capitalization and word shape (e.g. “Xxxx” — four-letter words where the first character is capitalized). HMMs don’t permit overlapping features, since as a result of their generative structure they require that all events in the observation layer be independent of one another. MEMMs, on the other hand, are discriminative and able to relax the independence requirement, so they can use arbitrary overlapping features [@McCallum2000].
 
-Common practice is to use binary features, such as:
+Common practice is to represent features as binary functions, such as:
 
 $$
-b(o_t) = \begin{cases}
-	\textrm{1 if $o_t$ has shape “Xxx”} \\
+b_{\text{shape=Xxxx}}(o_t) = \begin{cases}
+	\textrm{1 if $o_t$ has shape “Xxxx”} \\
 	\textrm{0 otherwise}
 	\end{cases}
 $$
 
-These features are then paired with the current state $s$ to form feature-state pairs $a = \langle b, s \rangle$:
+Applied to the example above, we have:
+
+<MEMMWordShapeExamples />
+
+Binary features are paired with the current state $s$ to form feature-state pairs $a = \langle b, s \rangle$, also expressed as binary functions:
 
 $$
-f_{\langle b, s \rangle}(o_t, s_t) = \begin{cases}
+f_a(o_t, s_t) = f_{\langle b, s \rangle}(o_t, s_t) = \begin{cases}
 	\textrm{1 if $b(o_t) = 1$ and $s_t = s$} \\
 	\textrm{0 otherwise}
 	\end{cases}
 $$
 
-Feature-state pairs provide useful additional information how which features and states go together and which don’t. For example, we can expect pairs like "is_capitalized" + “B-ORG” to occur together frequently, capturing the fact that in English named entities are often capitalized.
+Feature-state pairs help MEMMs learn which features and states go together and which don’t. For example, we can expect pairs like "is_capitalized" + “B-ORG” to frequently co-occur, capturing the fact that in English named entities are often capitalized.
 
 ### State Transitions
 
