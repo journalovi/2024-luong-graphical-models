@@ -536,6 +536,45 @@ Since both models are trained with the same dataset, features, and unary structu
 
 ---
 
+## V. Conclusion
+
+Throughout this article, we’ve charted the successive development of three families of graphical models, all united for the common task of named entity recognition. We’ve demonstrated how in various aspects, each was an improvement over the one before. First came HMMs with their simple, intuitive generative structure:
+
+<HMMOverviewGraph />
+
+Then MEMMs came along with a discriminative structure, which helps it relax the strict requirement of independence between input variables still held by HMMs:
+
+<MEMMOverviewGraph />
+
+CRFs, in turn, were developed with an undirected structure and global probability normalization to specifically resolve the label bias problem afflicting MEMMs, thus improving overall performance, especially for long named entities:
+
+<CRFOverviewGraph />
+
+Along the way, we see a gradual trend toward fewer assumptions (independence between observations, directionality) and therefore greater expressivity from one model to the next.
+
+Here are all three once again in action:
+
+<LivePrediction
+	hideTagPrefixes
+	models={['hmm', 'memm', 'crf']}
+	initialInputValue="Suu Kyi's National League for Democracy"
+	label={
+		<Fragment>
+			Which of these words refer to a&nbsp;
+			<abbr title="A person, organization, location, or other (miscellaneous)">
+				<span>named entity</span>
+			</abbr>
+			?
+		</Fragment>
+	}
+/>
+
+The work continues. CRFs remain a powerful tool for not only language modeling but also various image recognition tasks [@Sutton2010]. In 2016, Zheng et al. [@Zheng2015] reinterpreted CRFs as recurrent neural networks (CRF-RNNs) and demonstrated their effectiveness in semantic image segmentation — an encouraging result and compelling example of the theoretical breadth of CRFs specifically and of graphical models more generally.
+
+We hope that this article has contributed to that understanding. Applied to the right set of problems, probabilistic graphical models are a powerful framework for statistical modeling. Their intuitive structure and high interpretability belie their great representational power.
+
+---
+
 <References />
 
 ---
