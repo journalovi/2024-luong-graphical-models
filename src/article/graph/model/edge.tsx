@@ -12,6 +12,8 @@ interface EdgeProps {
 		target: string
 	}
 	isDirected?: boolean
+	isFaded?: boolean
+	label?: string
 }
 
 class Edge {
@@ -21,6 +23,8 @@ class Edge {
 		target: string
 	}
 	isDirected: boolean
+	isFaded: boolean
+	label?: string
 
 	constructor(props: EdgeProps) {
 		makeObservable(this, {
@@ -30,6 +34,8 @@ class Edge {
 		})
 		this.nodes = props.nodes
 		this.isDirected = props.isDirected ?? true
+		this.isFaded = props.isFaded ?? false
+		this.label = props.label
 	}
 }
 

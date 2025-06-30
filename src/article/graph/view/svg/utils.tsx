@@ -20,6 +20,7 @@ export function mapMutableNodes(node: Node, index: number): MutableNode {
 		index,
 		id: node.id,
 		label: node.label,
+		isFaded: node.isFaded,
 		x: node.x,
 		y: node.y,
 		forceX: node.forceX,
@@ -38,6 +39,8 @@ export function mapMutableEdges(
 		source: mutableNodes.find((n) => n.id === edge.nodes.source) as MutableNode,
 		target: mutableNodes.find((n) => n.id === edge.nodes.target) as MutableNode,
 		isDirected: edge.isDirected,
+		isFaded: edge.isFaded,
+		label: edge.label,
 	}
 }
 
@@ -61,6 +64,7 @@ export function renderSVGNodes(
 				const g = enter
 					.append('g')
 					.classed('node-wrap', true)
+					.classed('faded', (d) => d.isFaded)
 					.attr('id', (d) => `node-${d.id}`)
 
 				const rect = g
@@ -104,6 +108,16 @@ export function renderSVGNodes(
 		)
 }
 
+function getEdgeBoxWidth(edge: MutableEdge) {
+	if (!edge.label) {
+		return 0
+	}
+	return edge.label.length * 9 + 8
+}
+function getEdgeBoxHeight() {
+	return 18
+}
+
 export function renderSVGEdges(
 	renderedEdges: RenderedEdges,
 	data: MutableEdge[],
@@ -112,19 +126,46 @@ export function renderSVGEdges(
 	renderedEdges
 		.selectAll('g')
 		.data<MutableEdge>(data, (e) => (e as MutableEdge).id)
-		.join((enter) =>
-			enter
+		.join((enter) => {
+			const group = enter
 				.append('g')
-				.datum<MutableEdge>((edge) => getUpdatedMutableEdge(edge))
+				.datum<MutableEdge>((edge: MutableEdge) => getUpdatedMutableEdge(edge))
+				.classed('edge-wrap', true)
+				.classed('faded', (d) => d.isFaded)
+
+			group
 				.append('line')
-				.attr('marker-end', (edge) =>
+				.attr('marker-end', (edge: MutableEdge) =>
 					edge.isDirected ? `url(#arrow-marker-${arrowMarkerId})` : null,
 				)
-				.attr('x1', (d) => d.x1 ?? null)
-				.attr('y1', (d) => d.y1 ?? null)
-				.attr('x2', (d) => d.x2 ?? null)
-				.attr('y2', (d) => d.y2 ?? null),
-		)
+				.attr('x1', (d: MutableEdge) => d.x1 ?? null)
+				.attr('y1', (d: MutableEdge) => d.y1 ?? null)
+				.attr('x2', (d: MutableEdge) => d.x2 ?? null)
+				.attr('y2', (d: MutableEdge) => d.y2 ?? null)
+
+			group
+				.append('rect')
+				.attr(
+					'x',
+					(d: MutableEdge) => ((d.x2 ?? 0) + (d.x1 ?? 0)) / 2 - getEdgeBoxWidth(d) / 2,
+				)
+				.attr(
+					'y',
+					(d: MutableEdge) => ((d.y2 ?? 0) + (d.y1 ?? 0)) / 2 - getEdgeBoxHeight() / 2,
+				)
+				.attr('width', getEdgeBoxWidth)
+				.attr('height', getEdgeBoxHeight)
+				.classed('edge-label-box', true)
+
+			group
+				.append('text')
+				.text((d: MutableEdge) => d.label ?? '')
+				.attr('dominant-baseline', 'middle')
+				.attr('text-anchor', 'middle')
+				.attr('x', (d: MutableEdge) => ((d.x2 ?? 0) + (d.x1 ?? 0)) / 2)
+				.attr('y', (d: MutableEdge) => ((d.y2 ?? 0) + (d.y1 ?? 0)) / 2 + 1)
+				.classed('edge-label', true)
+		})
 }
 
 export function getNodeBoundary(node: MutableNode) {

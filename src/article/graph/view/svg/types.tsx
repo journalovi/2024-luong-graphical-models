@@ -6,6 +6,7 @@ import Node from '../../model/node'
 export interface MutableNode {
 	id: Node['id']
 	label: Node['label']
+	isFaded: boolean
 	index: number
 	forceX?: number
 	forceY?: number
@@ -23,6 +24,8 @@ export interface MutableEdge {
 	source: MutableNode
 	target: MutableNode
 	isDirected: boolean
+	isFaded: boolean
+	label?: string
 	x1?: number
 	y1?: number
 	x2?: number

@@ -21,6 +21,10 @@ import MEMMWordShapeExamples from './partIII/wordShapeExamples'
 import MEMMOverviewGraph from './partIII/overviewGraph'
 import MEMMPerEntityScorecards from './partIII/perEntityScorecards'
 import MEMMPerWordScorecard from './partIII/perWordScorecards'
+import MEMMLabelBiasGraphFull from './partIII/labelBiasGraphFull'
+import MEMMLabelBiasGraphS from './partIII/labelBiasGraphS'
+import MEMMLabelBiasGraphP from './partIII/labelBiasGraphP'
+import MEMMLabelBiasGraphL from './partIII/labelBiasGraphL'
 import CRFOverviewGraph from './partIV/overviewGraph'
 import CRFOverviewGraphLongRange from './partIV/overviewGraphLongRange'
 import CRFRandomFieldGraph from './partIV/randomFieldGraph'
@@ -360,11 +364,45 @@ With stronger predictive power on OOV words, we can additionally expect better p
 
 ### Label Bias Problem
 
-MEMMs’ discriminative structure confers great benefits, but there’s a downside: it makes them susceptible to the label bias problem. First recorded by Bottou [@Bottou1991], this problem mostly affects discriminative models, causing certain states to effectively ignore their observations, biasing predictions toward less likely transition paths. While the label bias problem doesn’t render models useless, it still has a notable effect on predictions, causing demonstrably higher error rates [@Lafferty2001].
+MEMMs’ discriminative structure offers great benefits as demonstrated above, but it comes with a downside: the label bias problem. First reported by Bottou [@Bottou1991], label bias mostly affects discriminative models, causing certain states to effectively ignore their observations, leading to demonstrably higher error rates [@Lafferty2001].
 
-What’s important to know is that MEMMs fall victim to the label bias problem because they have local probability normalization. The normalization term $Z(o, s\prime)$ ensures that transition probabilities between neighboring states sum up to one. Local normalization forces every state to transfer all of its probability mass onto the next state, regardless of how likely or unlikely the current observation is. Hannun [@Hannun2019] provides an excellent, detailed explanation of how this happens.
+Here’s how it happens. Recall that MEMMs model state transitions as probability distributions $p_{s'}(s|o)$. For these probabilities to be valid, the distributions must sum up to one:
 
-We can consider getting rid of local normalization to avoid the problem. That would lead us to Conditional Random Fields — a class of globally-normalized, undirected probabilistic models, which we’ll cover next.
+$$
+\sum_s{p_{s\prime}(s|o)} = 1
+$$
+
+This requirement is satisfied by _local_ normalization via the term $Z(o,s\prime)$ baked directly into the definition of $p_{s\prime}(s|o)$:
+
+$$
+p_{s\prime}(s|o) =  \frac{1}{Z(o, s\prime)} \exp\left(\sum_{a}{\lambda_a \, f_a(o, s)}\right)
+$$
+
+The normalization is “local” since it’s applied to individual parts of the graph (in this case, the transition between two states) as opposed to the whole structure. It’s here that the problem arises: scores leaving a state are rescaled to become proper probabilities, and in the process information about how likely the transitions are under the given observations is erased. A simple example can help illustrate this effect.
+
+Let’s assume that there are only two hidden states in our model: “L” if the word is part of a location name, and “P” if it’s part of a person’s name. There’s a special state “S” for the start of the sentence. We observe the two-word sequence “Stone Creek”. The transition graph is the following:
+
+<MEMMLabelBiasGraphFull />
+
+At inference time we proceed from left to right. The first observation is “Stone”. We need to find $p_{\text{S}}(\text{L}|\text{“Stone”})$ and $p_{\text{S}}(\text{P}|\text{“Stone”})$. Let’s say that they both have the same value, $0.5$:
+
+<MEMMLabelBiasGraphS />
+
+We then go to the second observation, “Creek”. The first pair of transition probabilities that we need to calculate is $p_{\text{L}}(\text{L}|\text{“Creek”})$ and $p_{\text{L}}(\text{P}|\text{“Creek”})$. Under local normalization, the two must sum up to one. Let’s say that they come out to $0.9$ and $0.1$ respectively.
+
+<MEMMLabelBiasGraphL />
+
+So far so good. Now we need to calculate $p_{\text{P}}(\text{L}|\text{“Creek”})$ and $p_{\text{P}}(\text{P}|\text{“Creek”})$. Let’s say probabilities are, in turn, $0.05$ and $0.95$.
+
+<MEMMLabelBiasGraphP />
+
+Now, intuitively the word “Creek” is much more likely to be part of a location name than a person’s name. But here the first set of transition probabilities, $p_{\text{L}}$ — $\{0.9, 0.1\}$, have the same total mass as the second set, $p_{\text{P}}$ — $\{0.05, 0.95\}$. Both sum up to one because of local normalization. The result is that taken together, the model judges paths that go through the “L” state first (i.e. “S” → “L” → “L” and “S” → “L” → “P”) to be about as likely as those that go through the “P” state first (“S” → “P” → “L” and “S” → “P” → “P”), contradicting our intuition about “Creek” being more consistent with the former than the latter. The model has in effect ignored crucial information contained within the observation “Creek”.
+
+More generally, due to MEMMs’ discriminative structure, observations can only affect how the incoming probabilities are distributed across the possible current states, but not how much total probability mass to pass on. That total mass must always equal one, due to local normalization. In the example above, given the previous state “P”, the observation “Creek” may shift the distribution over the current state toward $\{0.05, 0.95\}$ rather than some other split like $\{0.1, 0.9\}$, but it cannot change the total probability mass that the previous state “P” passes on. We can’t have the transition probability pair be, say, $\{0.01, 0.19\}$, which would better reflect our intuition about “P” being less likely under “Creek”.
+
+So that is the crux of the label bias problem. Local probability normalization causes MEMMs to discard useful information about how likely state transitions are under a given observation. The problem extends beyond the simple case above. Hannun [@Hannun2019] offers an excellent, more detailed explanation of the problem and how it generalizes to more scenarios and model structures.
+
+There have been various proposed solutions to the label bias problem. One particularly successful strategy is to eschew local normalization in favor of normalization at the global, graph-wide level. That brings us to Conditional Random Fields, a class of globally normalized, undirected probabilistic models, which we’ll cover in the next section.
 
 ---
 
@@ -466,9 +504,17 @@ In the case of linear-chain CRFs, inference can be done efficiently using modifi
 
 ### Addressing the Label Bias Problem
 
-Global conditioning on $x$ helps CRFs avoid the label bias problem [@McCallum2000]. The problem mostly affects models with local probability normalization, including MEMMs [@Hannun2019]. CRFs avoid this since they model the probability of the entire state sequence $p(y|x)$, which has a single, global normalization term $Z$.
+Global conditioning on $x$ helps CRFs avoid the label bias problem [@McCallum2000]. As discussed above, the problem mostly affects models with local probability normalization, including MEMMs [@Hannun2019]. CRFs avoid this since they model the probability of the entire state sequence $p(y|x)$, which has a single, global normalization term $Z$:
 
-CRFs’ robustness against label bias, at least compared to MEMMs, has been well demonstrated in experimental conditions [@McCallum2000]. In practical applications, however, it’s more difficult to capture the presence and effect of label bias due to a myriad of confounding factors. Still, we can rule out potential confounders and try to isolate label bias in our test systems.
+$$
+p(x_1, x_2,…) = \frac{1}{Z}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(x_c)} \\
+\footnotesize\textrm{where Z is a normalization term} \\
+\footnotesize\textrm{and C is the set of cliques in $\mathcal{G}$}
+$$
+
+CRFs’ robustness against label bias, at least compared to MEMMs, has been well demonstrated in experimental conditions [@McCallum2000]. In practical applications, however, it’s more difficult to capture the presence and effect of label bias due to a myriad of confounding factors. Still, we can rule out potential confounders and try to isolate label bias in our test systems. We do so in the next section.
+
+### Results
 
 A test linear-chain CRF was trained using the same data and features as the MEMM in the previous section. Each hidden state in the CRF depends only on the current observation, forming a unary chain structure similar to the MEMM’s. (CRF states can depend on any observation, this test version on uses the current observation for a better comparison with the MEMM.)
 
@@ -486,7 +532,7 @@ The performance gains are spread out across states and OOV status:
 
 <BinaryOOVHeatmap models={['crf-unary', 'memm']} />
 
-Since both models are trained with the same dataset, features, and unary structure, the increased performance is attributable to global normalization. While these results are not a definitive proof of CRFs’ resistance to the label bias problem — global normalization could help improve model performance in other ways, it is nonetheless encouraging.
+Since both models are trained with the same dataset, features, and unary structure, the increased performance is attributable to global normalization. While these results are not a definitive proof of CRFs’ resistance to the label bias problem — global normalization could help improve model performance in other ways, it is nonetheless highly encouraging.
 
 ---
 

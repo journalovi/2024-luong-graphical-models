@@ -335,7 +335,7 @@ const SVG = styled.svg`
 	/* 
 	  Edge styles
 	*/
-	g.edges,
+	g.edges line,
 	marker {
 		fill: none;
 		stroke: var(--color-bar);
@@ -344,5 +344,15 @@ const SVG = styled.svg`
 	}
 	g.edges {
 		stroke-width: 2;
+	}
+	g.node-wrap.faded,
+	g.edge-wrap.faded {
+		opacity: 0.2;
+	}
+	g.edges .edge-label {
+		fill: var(--color-label);
+	}
+	g.edges .edge-label-box {
+		fill: var(--color-background);
 	}
 `

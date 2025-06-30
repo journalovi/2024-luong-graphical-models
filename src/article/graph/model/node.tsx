@@ -8,6 +8,7 @@ interface NodeProps {
 		outgoing: string[]
 		undirected: string[]
 	}
+	isFaded?: boolean
 	/**
 	 * Adds a forceX to the simulation. When paired with forceY, will force the
 	 * node to stay in the specified position even after dragging.
@@ -40,6 +41,7 @@ class Node {
 		outgoing: string[]
 		undirected: string[]
 	}
+	isFaded: boolean
 	isHighlighted: boolean
 	forceX?: number
 	forceY?: number
@@ -64,6 +66,7 @@ class Node {
 		})
 		this.label = props.label ?? ''
 		this.edges = { incoming: [], outgoing: [], undirected: [] }
+		this.isFaded = props.isFaded ?? false
 		this.isHighlighted = false
 		this.forceX = props.forceX
 		this.forceY = props.forceY
