@@ -8,6 +8,7 @@ import ABCDGraph from './partI/sampling/abcdGraph'
 import StaticABCDGraph from './partI/staticABCDGraph'
 import HMMEmissionGraph from './partII/emissionGraph'
 import HMMEmissionPaths from './partII/emissionPaths'
+import HMMTagGraph from './partII/tagGraph'
 import HMMNERGraph from './partII/nerGraph'
 import HMMOverviewGraph from './partII/overviewGraph'
 import HMMPerEntityScorecards from './partII/perEntityScorecards'
@@ -162,7 +163,11 @@ The conditional probability $p(o_i | s_i)$ is called the "emission probability."
 
 ### Representing Named Entities
 
-HMMs’ chain structure is particularly useful in sequence labeling problems like NER. For each input text sequence, the observed layer represents known word tokens, while the hidden layer contains their respective name tags:
+Throughout this article, we’ll work with the CoNLL-2003 English dataset [@Sang2003]. The dataset recognizes 9 possible name tags. Each, apart from the “O” tag, has either a “B-” (for beginning) or “I-” (for internal/inside) prefix, to eliminate confusion about when an entity stops and the next one begins. For example:
+
+<HMMTagGraph />
+
+HMMs represent the input word tokens with the observed layer, with the respective name tags constitue the hidden layer:
 
 <HMMNERGraph />
 
@@ -174,8 +179,6 @@ HMMs’ chain structure is particularly useful in sequence labeling problems lik
 	(“O”, “Great”). This helps make the graphs easier to read.
 </Callout>
 }
-
-There are 9 possible name tags. Each, apart from the “O” tag, has either a B- (beginning) or I- (inside) prefix, to eliminate confusion about when an entity stops and the next one begins.
 
 Between any two consecutive hidden states, there are 9&#178; = 81 possible transitions. Each transition has its own probability, $p(s_i|s_{i-1})$:
 
@@ -206,7 +209,7 @@ Luckily, there is an efficient dynamic algorithm that returns the most likely pa
 
 ### Results
 
-An HMM with the structure outlined above was trained on the CoNLL-2003 English dataset [@Sang2003]. The training set contains 14,987 sentences and a total of 203,621 word tokens. Here's the model in action:
+An HMM with the structure outlined above was trained on the CoNLL-2003 dataset. The training set contains 14,987 sentences and a total of 203,621 word tokens. Here's the model in action:
 
 <LivePrediction
 	models={['hmm']}
