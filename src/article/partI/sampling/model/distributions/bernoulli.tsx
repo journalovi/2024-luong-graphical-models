@@ -12,13 +12,13 @@ class BernoulliDistribution implements DiscreteDistribution {
 			minValue: 0,
 			maxValue: 1,
 			step: 0.01,
+			defaultValue: 0.8,
 		},
 	}
-	parameterValues
+	parameterValues: Record<string, number> = {}
 
-	constructor(p = 0.8) {
+	constructor() {
 		makeAutoObservable(this)
-		this.parameterValues = { p }
 	}
 
 	setParameterValue(name: string, value: number) {

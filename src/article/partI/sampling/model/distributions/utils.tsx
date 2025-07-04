@@ -26,6 +26,7 @@ export enum ParameterType {
 export interface ParameterInfo {
 	displayName: string
 	description: string
+	defaultValue: number
 	minValue?: number
 	maxValue?: number
 	step?: number

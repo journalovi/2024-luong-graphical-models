@@ -63,8 +63,8 @@ const ChildNodeFields = ({ node, incomingEdges, parentNodes }: ChildNodeFieldsPr
 			<NumberField
 				small
 				rowLayout
-				value={node.distribution.parameterValues.sigma}
-				onChange={(val) => node.distribution.setParameterValue('sigma', val)}
+				value={node.hyperparameters.sigma}
+				onChange={(val) => node.setHyperparameter('sigma', val)}
 				label={'\u03c3 – scale parameter'}
 				description="Determines the normal distribution's standard deviation."
 				step={0.1}

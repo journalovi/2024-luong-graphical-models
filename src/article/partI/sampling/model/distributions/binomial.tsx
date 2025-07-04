@@ -12,6 +12,7 @@ class BinomialDistribution implements DiscreteDistribution {
 			displayName: 'n',
 			description: 'Number of trials.',
 			minValue: 0,
+			defaultValue: 10,
 		},
 		p: {
 			displayName: 'p',
@@ -19,13 +20,13 @@ class BinomialDistribution implements DiscreteDistribution {
 			minValue: 0,
 			maxValue: 1,
 			step: 0.1,
+			defaultValue: 0.5,
 		},
 	}
-	parameterValues
+	parameterValues: Record<string, number> = {}
 
-	constructor(n = 10, p = 0.5) {
+	constructor() {
 		makeAutoObservable(this)
-		this.parameterValues = { n, p }
 	}
 
 	setParameterValue(name: string, value: number) {

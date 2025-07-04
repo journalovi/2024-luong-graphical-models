@@ -14,21 +14,22 @@ class NormalDistribution implements ContinuousDistribution {
 			displayName: '\u03bc – mu',
 			description: "Location parameter, corresponds to the distribution's mean.",
 			type: ParameterType.Location,
+			defaultValue: 0,
 		},
 		sigma: {
 			displayName: '\u03c3 – sigma',
 			description:
 				"Scale parameter, corresponds to the distribution's standard deviation.",
+			type: ParameterType.Scale,
 			minValue: 0.1,
 			step: 0.1,
-			type: ParameterType.Scale,
+			defaultValue: 1,
 		},
 	}
-	parameterValues
+	parameterValues: Record<string, number> = {}
 
-	constructor(mu = 0, sigma = 1) {
+	constructor() {
 		makeAutoObservable(this)
-		this.parameterValues = { mu, sigma }
 	}
 
 	setParameterValue(name: string, value: number) {

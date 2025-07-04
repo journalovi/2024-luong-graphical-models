@@ -16,22 +16,24 @@ import {
 } from './distributions/utils'
 
 type SamplingNodeProps = ConstructorParameters<typeof Node>[0] & {
-	distribution?: Distribution
+	distributionType?: DistributionType
 }
 
 class SamplingNode extends Node {
-	distribution: Distribution
+	distribution: Distribution = new NormalDistribution()
+	hyperparameters: Record<string, number> = {}
 
 	constructor(props: SamplingNodeProps) {
 		super(props)
-		makeObservable(this, { distribution: observable, setDistribution: action })
-		this.distribution = props.distribution ?? new NormalDistribution()
+		makeObservable(this, {
+			distribution: observable,
+			hyperparameters: observable,
+			initializeHyperparameters: action,
+			setHyperparameter: action,
+			setDistribution: action,
+		})
+		this.setDistribution(props.distributionType ?? ContinuousDistributionType.Normal)
 	}
-
-	// removeIncomingEdge(edge: string) {
-	// 	super.removeIncomingEdge(edge)
-	// 	this.setDistribution(ContinuousDistributionType.Normal)
-	// }
 
 	setDistribution(dist: DistributionType) {
 		switch (dist) {
@@ -54,6 +56,19 @@ class SamplingNode extends Node {
 				this.distribution = new BinomialDistribution()
 				break
 		}
+
+		this.initializeHyperparameters()
+	}
+
+	initializeHyperparameters() {
+		Object.keys(this.distribution.parameters).forEach((parameter) => {
+			this.hyperparameters[parameter] =
+				this.distribution.parameters[parameter].defaultValue
+		})
+	}
+
+	setHyperparameter(parameter: string, value: number) {
+		this.hyperparameters[parameter] = value
 	}
 
 	sample(n = 1) {

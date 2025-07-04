@@ -18,7 +18,8 @@ interface RootNodePanelProps {
 }
 
 const RootNodePanel = ({ node }: RootNodePanelProps) => {
-	const { parameters, parameterValues, type: distributionType } = node.distribution
+	const { hyperparameters, distribution } = node
+	const { parameters, type: distributionType } = distribution
 
 	return (
 		<Wrap>
@@ -51,8 +52,8 @@ const RootNodePanel = ({ node }: RootNodePanelProps) => {
 						key={param}
 						small
 						rowLayout
-						value={parameterValues[param]}
-						onChange={(val) => node.distribution.setParameterValue(param, val)}
+						value={hyperparameters[param]}
+						onChange={(val) => node.setHyperparameter(param, val)}
 						label={displayName}
 						description={description}
 						minValue={minValue}

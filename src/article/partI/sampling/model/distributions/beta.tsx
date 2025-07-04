@@ -17,6 +17,7 @@ class BetaDistribution implements ContinuousDistribution {
 			minValue: 0.1,
 			step: 0.1,
 			type: ParameterType.Shape,
+			defaultValue: 2,
 		},
 		beta: {
 			displayName: '\u03b2 – beta',
@@ -24,13 +25,13 @@ class BetaDistribution implements ContinuousDistribution {
 			minValue: 0.1,
 			step: 0.1,
 			type: ParameterType.Shape,
+			defaultValue: 5,
 		},
 	}
-	parameterValues
+	parameterValues: Record<string, number> = {}
 
-	constructor(alpha = 2, beta = 5) {
+	constructor() {
 		makeAutoObservable(this)
-		this.parameterValues = { alpha, beta }
 	}
 
 	setParameterValue(name: string, value: number) {

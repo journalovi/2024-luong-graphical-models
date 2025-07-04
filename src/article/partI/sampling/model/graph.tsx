@@ -13,6 +13,10 @@ class SamplingGraph extends Graph<SamplingNode, SamplingEdge> {
 		sortedNodes.forEach((nodeId) => {
 			const node = this.getNode(nodeId)
 
+			Object.entries(node.hyperparameters).forEach(([parameter, value]) => {
+				node.distribution.setParameterValue(parameter, value)
+			})
+
 			// If current node is a root node, then sample from its sampling distribution
 			if (node.isRoot) {
 				samples[nodeId] = node.sample(n)

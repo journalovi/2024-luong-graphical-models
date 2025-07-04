@@ -14,23 +14,24 @@ class GammaDistribution implements ContinuousDistribution {
 		k: {
 			displayName: 'k',
 			description: 'Shape parameter.',
+			type: ParameterType.Shape,
 			minValue: 0.1,
 			step: 0.1,
-			type: ParameterType.Shape,
+			defaultValue: 2,
 		},
 		theta: {
 			displayName: '\u03b8 – theta',
 			description: 'Scale parameter.',
+			type: ParameterType.Scale,
 			minValue: 0.1,
 			step: 0.1,
-			type: ParameterType.Scale,
+			defaultValue: 5,
 		},
 	}
-	parameterValues
+	parameterValues: Record<string, number> = {}
 
-	constructor(k = 2, theta = 5) {
+	constructor() {
 		makeAutoObservable(this)
-		this.parameterValues = { k, theta }
 	}
 
 	setParameterValue(name: string, value: number) {

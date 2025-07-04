@@ -17,13 +17,13 @@ class ExponentialDistribution implements ContinuousDistribution {
 			minValue: 0.01,
 			step: 0.01,
 			type: ParameterType.Scale,
+			defaultValue: 0.5,
 		},
 	}
-	parameterValues
+	parameterValues: Record<string, number> = {}
 
-	constructor(lambda = 0.5) {
+	constructor() {
 		makeAutoObservable(this)
-		this.parameterValues = { lambda }
 	}
 
 	setParameterValue(name: string, value: number) {
