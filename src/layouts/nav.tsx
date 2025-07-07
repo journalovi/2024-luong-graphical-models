@@ -7,6 +7,7 @@ import Grid from '@components/grid'
 
 import { TableOfContentsItem } from '@types'
 
+import GlossaryDrawer from './glossaryDrawer'
 import TOCDrawer from './tocDrawer'
 
 interface NavProps {
@@ -28,18 +29,21 @@ const Nav = ({ pageTitle, tableOfContents }: NavProps) => {
 							</PageTitle>
 						</PageTitleWrap>
 
-						{tableOfContents ? (
-							<TOCDrawer items={tableOfContents} />
-						) : (
-							<TrailingWrap>
-								<NavLink to="/projects" current={location.pathname === '/projects/'}>
-									Projects
-								</NavLink>
-								<NavLink to="/about" current={location.pathname === '/about/'}>
-									About
-								</NavLink>
-							</TrailingWrap>
-						)}
+						<TrailingWrap>
+							<GlossaryDrawer />
+							{tableOfContents ? (
+								<TOCDrawer items={tableOfContents} />
+							) : (
+								<TrailingWrap>
+									<NavLink to="/projects" current={location.pathname === '/projects/'}>
+										Projects
+									</NavLink>
+									<NavLink to="/about" current={location.pathname === '/about/'}>
+										About
+									</NavLink>
+								</TrailingWrap>
+							)}
+						</TrailingWrap>
 					</Fragment>
 				</InnerGrid>
 			</Wrap>
@@ -155,15 +159,9 @@ const PageTitle = styled(Link).withConfig({
 `
 
 const TrailingWrap = styled.div`
-	display: contents;
-
-	${(p) => p.theme.breakpoints.xs} {
-		width: 100%;
-		display: flex;
-		justify-content: end;
-		gap: var(--space-0-5);
-		min-width: 0;
-	}
+	grid-column: -2;
+	display: flex;
+	justify-content: end;
 `
 
 const NavLink = styled(Link).withConfig({

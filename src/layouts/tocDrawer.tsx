@@ -267,15 +267,12 @@ const BaseTOCItem = ({ title, url, depth, current, ...props }: TOCItemProps) => 
 const TOCItem = memo(BaseTOCItem)
 
 const TOCControlOuterWrap = styled(ShadowRoot)`
-	grid-column: -2;
-	justify-self: end;
 	contain: layout;
 `
 
 const TOCTriggerButton = styled(Button)`
 	display: flex;
 	gap: var(--space-0-5);
-	justify-self: end;
 `
 
 const TOCBackgroundNoise = styled.div`
@@ -368,11 +365,11 @@ const TOCItemWrap = styled.a<{ depth: number }>`
 			? css`
 					color: var(--color-heading);
 					font-weight: 500;
-			  `
+				`
 			: css`
 					color: var(--color-label);
 					font-weight: 400;
-			  `}
+				`}
 `
 
 const TOCItemCurrentIndicator = styled.div`

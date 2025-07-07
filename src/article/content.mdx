@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 
 import SubHeading from './subHeading'
-import ReviewBanner from './reviewBanner'
+import Banner from './banner'
 import Callout from './callout'
 import LivePrediction from './livePrediction'
 import ABCDGraph from './partI/sampling/abcdGraph'
@@ -37,13 +37,40 @@ import EntityLengthHeatmap from './precisionRecallHeatmaps/entityLengthHeatmap'
 import OOVRateHeatmap from './precisionRecallHeatmaps/oovRateHeatmap'
 import Footer from './footer'
 
-<ReviewBanner />
-
 <Header mb={3}>
 
 # Learning What’s in a Name with Graphical Models
 
 </Header>
+
+{
+
+<Banner>
+	<strong>Under Review:</strong> This paper is{' '}
+	<a
+		href="https://www.journalovi.org/under-review.html"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		under review
+	</a>{' '}
+	on the experimental track of the{' '}
+	<a href="https://www.journalovi.org/" target="_blank" rel="noopener noreferrer">
+		Journal of Visualization and Interaction
+	</a>
+	. See the{' '}
+	<a
+		href="https://github.com/journalovi/2024-luong-graphical-models/issues"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		reviewing process
+	</a>
+	.
+</Banner>
+}
+
+&nbsp;
 
 <SubHeading>Abstract</SubHeading>
 
@@ -53,19 +80,19 @@ In this case, contextual information is key. The fact that “The UK” is follo
 
 In this article, we’ll explore three families of sequence models that are remarkably successful at NER: Hidden Markov Models (HMMs), Maximum-Entropy Markov Models (MEMMs), and Conditional Random Fields (CRFs). All three are probabilistic graphical models, which we’ll cover in the next section. Each simultaneously builds upon the success of the one before and addresses specific, fundamental problems affecting its predecessor. Therein lies a story of iterative development, as models become more capable and theories more generalized and expressive.
 
+{
+
+<Banner>
+	<strong>Tip:</strong> refer to the glossary in the top right corner for definitions of
+	key terms like “named entity”.
+</Banner>
+}
+
 <LivePrediction
 	hideTagPrefixes
 	models={['hmm', 'memm', 'crf']}
 	initialInputValue="The UK Department of Transport"
-	label={
-		<Fragment>
-			Which of these words refer to a&nbsp;
-			<abbr title="A person, organization, location, or other (miscellaneous)">
-				<span>named entity</span>
-			</abbr>
-			?
-		</Fragment>
-	}
+	label={<Fragment>Which of these words refer to named entity?</Fragment>}
 />
 
 ---
@@ -214,7 +241,7 @@ An HMM with the structure outlined above was trained on the CoNLL-2003 dataset. 
 <LivePrediction
 	models={['hmm']}
 	label="Name tag predictions by HMM:"
-	initialInputValue="The UK Department of Transport"
+	initialInputValue="The London-to-Boston route"
 />
 
 Evaluated against a test set, the model achieves satisfactory per-word accuracy:
@@ -521,6 +548,14 @@ CRFs’ robustness against label bias, at least compared to MEMMs, has been well
 
 A test linear-chain CRF was trained using the same data and features as the MEMM in the previous section. Each hidden state in the CRF depends only on the current observation, forming a unary chain structure similar to the MEMM’s. (CRF states can depend on any observation, this test version on uses the current observation for a better comparison with the MEMM.)
 
+Here’s a live version of the trained model:
+
+<LivePrediction
+	models={['crf']}
+	initialInputValue="Czech President Vaclav Havel"
+	label="Name tag predictions by unary CRF:"
+/>
+
 The resulting unary CRF closely resembles the baseline MEMM. Both have exponential form with a weighted sum of all word features as the exponent. The only meaningful difference between the two is how normalization is done: globally for the CRF and locally for the MEMM. Since the label bias problem comes from local normalization, we should see more bias, observable as errors, in the MEMM than the CRF.
 
 Overall, the unary CRF strongly outperforms the MEMM. While it has only slightly higher accuracy (compared to the MEMM’s 93.1%):
@@ -561,15 +596,7 @@ Here are all three once again in action:
 	hideTagPrefixes
 	models={['hmm', 'memm', 'crf']}
 	initialInputValue="Suu Kyi's National League for Democracy"
-	label={
-		<Fragment>
-			Which of these words refer to a&nbsp;
-			<abbr title="A person, organization, location, or other (miscellaneous)">
-				<span>named entity</span>
-			</abbr>
-			?
-		</Fragment>
-	}
+	label={<Fragment>Which of these words refer to named entity?</Fragment>}
 />
 
 The work continues. CRFs remain a powerful tool for not only language modeling but also various image recognition tasks [@Sutton2010]. In 2016, Zheng et al. [@Zheng2015] reinterpreted CRFs as recurrent neural networks (CRF-RNNs) and demonstrated their effectiveness in semantic image segmentation — an encouraging result and compelling example of the theoretical breadth of CRFs specifically and of graphical models more generally.

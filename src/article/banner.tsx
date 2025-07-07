@@ -1,38 +1,17 @@
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 import Grid from '@components/grid'
 
-const ReviewBanner = () => {
+const Banner = ({ children }: { children: ReactNode }) => {
 	return (
 		<Grid>
-			<Wrap>
-				<strong>Under Review:</strong> This paper is{' '}
-				<a
-					href="https://www.journalovi.org/under-review.html"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					under review
-				</a>{' '}
-				on the experimental track of the{' '}
-				<a href="https://www.journalovi.org/" target="_blank" rel="noopener noreferrer">
-					Journal of Visualization and Interaction
-				</a>
-				. See the{' '}
-				<a
-					href="https://github.com/journalovi/2024-luong-graphical-models/issues"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					reviewing process
-				</a>
-				.
-			</Wrap>
+			<Wrap>{children}</Wrap>
 		</Grid>
 	)
 }
 
-export default ReviewBanner
+export default Banner
 
 const Wrap = styled.p`
 	position: relative;
@@ -40,8 +19,8 @@ const Wrap = styled.p`
 	${(p) => p.theme.gridColumn.text}
 	column-gap: var(--space-0);
 
-	margin-top: var(--adaptive-space-6);
-	margin-bottom: var(--adaptive-space-2);
+	margin-top: var(--adaptive-space-2);
+	margin-bottom: var(--adaptive-space-3);
 
 	&::before {
 		content: '';
@@ -59,6 +38,8 @@ const Wrap = styled.p`
 	color: var(--color-text);
 
 	a {
+		font-size: 1em;
+		color: currentcolor;
 		text-decoration-line: underline;
 		text-decoration-color: var(--color-link-underline);
 	}

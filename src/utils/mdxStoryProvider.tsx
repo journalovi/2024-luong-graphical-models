@@ -86,6 +86,6 @@ const HeaderWrap = styled.header`
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-4);
-	padding-top: var(--adaptive-space-5);
+	padding-top: var(--adaptive-space-6);
 	padding-bottom: var(--adaptive-space-5);
 `
