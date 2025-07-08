@@ -410,25 +410,25 @@ $$
 
 The normalization is “local” since it’s applied to individual parts of the graph (in this case, the transition between two states) as opposed to the whole structure. It’s here that the problem arises: scores leaving a state are rescaled to become proper probabilities, and in the process information about how likely the transitions are under the given observations is erased. A simple example can help illustrate this effect.
 
-Let’s assume that there are only two hidden states in our model: “L” if the word is part of a location name, and “P” if it’s part of a person’s name. There’s a special state “S” for the start of the sentence. We observe the two-word sequence “Stone Creek”. The transition graph is the following:
+Let’s assume that there are only two hidden states in our model: “LOC” if the word is part of a location name, and “PER” if it’s part of a person’s name. There’s a special state “S” for the start of the sentence. We observe the two-word sequence “Stone Creek”. The transition graph is the following:
 
 <MEMMLabelBiasGraphFull />
 
-At inference time we proceed from left to right. The first observation is “Stone”. We need to find $p_{\text{S}}(\text{L}|\text{“Stone”})$ and $p_{\text{S}}(\text{P}|\text{“Stone”})$. Let’s say that they both have the same value, $0.5$:
+At inference time we proceed from left to right. The first observation is “Stone”. We need to find $p_{\text{S}}(\text{LOC}|\text{“Stone”})$ and $p_{\text{S}}(\text{PER}|\text{“Stone”})$. Let’s say that they both have the same value, $0.5$:
 
 <MEMMLabelBiasGraphS />
 
-We then go to the second observation, “Creek”. The first pair of transition probabilities that we need to calculate is $p_{\text{L}}(\text{L}|\text{“Creek”})$ and $p_{\text{L}}(\text{P}|\text{“Creek”})$. Under local normalization, the two must sum up to one. Let’s say that they come out to $0.9$ and $0.1$ respectively.
+We then go to the second observation, “Creek”. The first pair of transition probabilities that we need to calculate is $p_{\text{LOC}}(\text{LOC}|\text{“Creek”})$ and $p_{\text{LOC}}(\text{PER}|\text{“Creek”})$. Under local normalization, the two must sum up to one. Let’s say that they come out to $0.9$ and $0.1$ respectively.
 
 <MEMMLabelBiasGraphL />
 
-So far so good. Now we need to calculate $p_{\text{P}}(\text{L}|\text{“Creek”})$ and $p_{\text{P}}(\text{P}|\text{“Creek”})$. Let’s say probabilities are, in turn, $0.05$ and $0.95$.
+So far so good. Now we need to calculate $p_{\text{PER}}(\text{LOC}|\text{“Creek”})$ and $p_{\text{PER}}(\text{PER}|\text{“Creek”})$. Let’s say probabilities are, in turn, $0.05$ and $0.95$.
 
 <MEMMLabelBiasGraphP />
 
-Now, intuitively the word “Creek” is much more likely to be part of a location name than a person’s name. But here the first set of transition probabilities, $p_{\text{L}}$ — $\{0.9, 0.1\}$, have the same total mass as the second set, $p_{\text{P}}$ — $\{0.05, 0.95\}$. Both sum up to one because of local normalization. The result is that taken together, the model judges paths that go through the “L” state first (i.e. “S” → “L” → “L” and “S” → “L” → “P”) to be about as likely as those that go through the “P” state first (“S” → “P” → “L” and “S” → “P” → “P”), contradicting our intuition about “Creek” being more consistent with the former than the latter. The model has in effect ignored crucial information contained within the observation “Creek”.
+Now, intuitively the word “Creek” is much more likely to be part of a location name than a person’s name. But here the first set of transition probabilities, $p_{\text{LOC}}$ — $\{0.9, 0.1\}$, have the same total mass as the second set, $p_{\text{PER}}$ — $\{0.05, 0.95\}$. Both sum up to one because of local normalization. The result is that taken together, the model judges paths that go through the “LOC” state first (i.e. “S” → “LOC” → “LOC” and “S” → “LOC” → “PER”) to be about as likely as those that go through the “PER” state first (“S” → “PER” → “LOC” and “S” → “PER” → “PER”), contradicting our intuition about “Creek” being more consistent with the former than the latter. The model has in effect ignored crucial information contained within the observation “Creek”.
 
-More generally, due to MEMMs’ discriminative structure, observations can only affect how the incoming probabilities are distributed across the possible current states, but not how much total probability mass to pass on. That total mass must always equal one, due to local normalization. In the example above, given the previous state “P”, the observation “Creek” may shift the distribution over the current state toward $\{0.05, 0.95\}$ rather than some other split like $\{0.1, 0.9\}$, but it cannot change the total probability mass that the previous state “P” passes on. We can’t have the transition probability pair be, say, $\{0.01, 0.19\}$, which would better reflect our intuition about “P” being less likely under “Creek”.
+More generally, due to MEMMs’ discriminative structure, observations can only affect how the incoming probabilities are distributed across the possible current states, but not how much total probability mass to pass on. That total mass must always equal one, due to local normalization. In the example above, given the previous state “PER”, the observation “Creek” may shift the distribution over the current state toward $\{0.05, 0.95\}$ rather than some other split like $\{0.1, 0.9\}$, but it cannot change the total probability mass that the previous state “PER” passes on. We can’t have the transition probability pair be, say, $\{0.01, 0.19\}$, which would better reflect our intuition about “PER” being less likely under “Creek”.
 
 So that is the crux of the label bias problem. Local probability normalization causes MEMMs to discard useful information about how likely state transitions are under a given observation. The problem extends beyond the simple case above. Hannun [@Hannun2019] offers an excellent, more detailed explanation of the problem and how it generalizes to more scenarios and model structures.
 
