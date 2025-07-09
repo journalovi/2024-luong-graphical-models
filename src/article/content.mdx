@@ -76,9 +76,7 @@ import Footer from './footer'
 
 “The UK” is a country, but “The UK Department of Transport” is an organization within that country. In a named entity recognition (NER) task, where we want to label each word with a name tag (organization/person/location/other/not a name), how can a computer model know one from the other?
 
-In this case, contextual information is key. The fact that “The UK” is followed by “Department” is compelling evidence that when taken together the phrase refers to an organization. Sequence models — machine learning systems designed to take sequences of data as input, can recognize and put such relationships to productive use. Rather than making isolated predictions based on individual words or word groups, they take the given sequence as a combined unit, model the dependencies between words in that sequences, and depending on the problem, can return the most likely label sequence.
-
-In this article, we’ll explore three families of sequence models that are remarkably successful at NER: Hidden Markov Models (HMMs), Maximum-Entropy Markov Models (MEMMs), and Conditional Random Fields (CRFs). All three are probabilistic graphical models, which we’ll cover in the next section. Each simultaneously builds upon the success of the one before and addresses specific, fundamental problems affecting its predecessor. Therein lies a story of iterative development, as models become more capable and theories more generalized and expressive.
+In this article, we’ll explore three model families that are remarkably successful at NER: Hidden Markov Models (HMMs), Maximum-Entropy Markov Models (MEMMs), and Conditional Random Fields (CRFs). We’ll use interactive visualizations to explain the graphical structure of each. Our overarching goal is to demonstrate how visualizations can be effective tools for communicating and clarifying complex, abstract concepts. The visualizations will allow us to compare and contrast between model families, and understand how each builds on and addresses key issues affecting its predecessors.
 
 {
 
