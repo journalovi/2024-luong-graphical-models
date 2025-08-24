@@ -386,7 +386,7 @@ The ability to model word features allows MEMMs to fare better with OOV-dense na
 
 <OOVRateHeatmap models={['memm', 'hmm']} />
 
-With stronger predictive power on OOV words, we can additionally expect better performance on long, multi-word entities. That’s because OOV words are dangerous information gaps inside named entities. They’re easy to misclassify, and when they are the entire entity prediction is counted as incorrect. MEMMs are able to fill those gaps to an extent by using word features. As a result, we don’t see as drastic of a performance deterioration for longer entities as observed with the HMM:
+With stronger predictive power on OOV words, we can additionally expect better performance on long, multi-word entities. That’s because OOV words are dangerous information gaps inside named entities. They’re easy to misclassify, and when they are the entire entity prediction is counted as incorrect. MEMMs are able to fill those gaps to an extent by using word features. As a result, we don’t see the drastic performance deterioration for longer entities observed with the HMM:
 
 <EntityLengthHeatmap models={['memm', 'hmm']} />
 
