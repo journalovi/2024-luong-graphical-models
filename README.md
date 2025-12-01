@@ -1,15 +1,15 @@
-```diff
-! This paper is under review on the experimental track of the Journal of Visualization and Interaction.
 
-R1 : cy99vis
-R2 : joviewer-xyz
-R3 : flipz357
+# Learning What’s in a Name with Graphical Models
 
-Also agreed : msedl
+An interactive article in the [Journal of Visualization and Interaction (JoVI)](https://journalovi.org/).
 
-```
+## Abstract
 
-# Graphical Models
+“The UK” is a country, but “The UK Department of Transport” is an organization within that country. In a named entity recognition (NER) task, where we want to label each word with a name tag (organization/person/location/other/not a name), how can a computer model know one from the other?
+
+In this article, we’ll explore three model families that are remarkably successful at NER: Hidden Markov Models (HMMs), Maximum-Entropy Markov Models (MEMMs), and Conditional Random Fields (CRFs). We’ll use interactive visualizations to explain the graphical structure of each. Our overarching goal is to demonstrate how visualizations can be effective tools for communicating and clarifying complex, abstract concepts. The visualizations will allow us to compare and contrast between model families, and understand how each builds on and addresses key issues affecting its predecessors.
+
+## Repository
 
 This is a self-contained version of "Learning What’s in a Name with Graphical Models". The HTML & JavaScript that is generated (via `yarn build`) works without needing a live backend. A pre-built version is available in `/public`.
 
@@ -74,3 +74,17 @@ Here are some quick links to documentation for core packages:
 - [React](https://reactjs.org/docs/getting-started.html)
 
 - [MDX](https://mdxjs.com) (Markdown documents with JSX support)
+
+## License
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+```
+Authors: @vuluongj20
+OC: @chatchavan
+AE: @jsndyks
+R1: @cy99vis
+R2: @joviewer-xyz
+R3: @flipz357
+(also agreed : @msedl)
+```
