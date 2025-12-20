@@ -98,6 +98,7 @@ const renderXAxis = (
 
 	return axisSelection
 		.attr('transform', `translate(${translateX} ${translateY})`)
+		.attr('aria-hidden', 'true')
 		.call(
 			xAxis
 				.tickValues(tickValues)
@@ -134,6 +135,7 @@ const renderYAxis = (
 
 	return axisSelection
 		.attr('transform', `translate(${translateX} ${translateY})`)
+		.attr('aria-hidden', 'true')
 		.call(
 			yAxis
 				.tickValues(tickValues)
@@ -164,6 +166,7 @@ const renderRowLabel = (
 
 	return labelSelection
 		.attr('transform', `translate(${subPlotPadding} ${translateY}) rotate(-90)`)
+		.attr('aria-hidden', 'true')
 		.selectAll<SVGTextElement, null>('text')
 		.data([null])
 		.join((enter) => {
@@ -191,6 +194,7 @@ const renderColumnLabel = (
 
 	return labelSelection
 		.attr('transform', `translate(${translateX} ${height - 4}) `)
+		.attr('aria-hidden', 'true')
 		.selectAll<SVGTextElement, null>('text')
 		.data([null])
 		.join((enter) => {

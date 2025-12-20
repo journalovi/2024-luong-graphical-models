@@ -66,6 +66,7 @@ export function renderSVGNodes(
 					.classed('node-wrap', true)
 					.classed('faded', (d) => d.isFaded)
 					.attr('id', (d) => `node-${d.id}`)
+					.attr('aria-hidden', 'true')
 
 				const rect = g
 					.append('rect')
@@ -132,6 +133,7 @@ export function renderSVGEdges(
 				.datum<MutableEdge>((edge: MutableEdge) => getUpdatedMutableEdge(edge))
 				.classed('edge-wrap', true)
 				.classed('faded', (d) => d.isFaded)
+				.attr('aria-hidden', 'true')
 
 			group
 				.append('line')
