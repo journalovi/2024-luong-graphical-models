@@ -20,7 +20,7 @@ const globalVariables = css`
     --color-heading: var(--color-scale-gray2);
     --color-body: var(--color-scale-gray2);
     --color-label: var(--color-scale-gray5);
-    --color-bar: var(--color-scale-gray7);
+    --color-bar: var(--color-scale-gray6);
     --color-surface-border: var(--color-scale-gray9);
     --color-focus: var(--color-scale-red3);
     --color-button-label: var(--color-scale-gray1);
