@@ -124,7 +124,7 @@ The hidden layer is assumed to be a Markov process: a chain of events in which e
 
 $$
 p(s_i | s_1, s_2,…, s_{i-1}) = p(s_i | s_{i-1}) \\
-\footnotesize\textrm{for all $i\,{\scriptscriptstyle \in}\,\{2,…, N\}$}
+\footnotesize\textrm{for all $i\,{\scriptstyle \in}\,\{2,…, N\}$}
 $$
 
 In a graph, this translates to a linear chain of events where each event has one arrow pointing towards it (except for the first event) and one pointing away from it (except for the last):
@@ -135,7 +135,7 @@ A second assumption that HMMs make is time-homogeneity: that the probability of 
 
 $$
 p(s_i | s_{i-1}) = p(s_{i+1} | s_i) \\
-\footnotesize\textrm{for all $i\,{\scriptscriptstyle \in}\,\{2,…, N-1\}$}
+\footnotesize\textrm{for all $i\,{\scriptstyle \in}\,\{2,…, N-1\}$}
 $$
 
 $p(s_i | s_{i-1})$ is called the transition probability and is one of the two key parameters to be learned during training.
@@ -148,7 +148,7 @@ The hidden and observed layers are connected via a one-to-one mapping. We assume
 
 $$
 p(o_i | s_1, s_2,…, s_N) = p(o_i | s_i) \\
-\footnotesize\textrm{for all $i\,{\scriptscriptstyle \in}\,\{1, 2,…, N\}$}
+\footnotesize\textrm{for all $i\,{\scriptstyle \in}\,\{1, 2,…, N\}$}
 $$
 
 In a graph, this one-to-one relationship looks like:
@@ -449,7 +449,7 @@ Note that $D$ isn’t present in the factorization, which makes intuitive sense.
 More generally, MRFs are probability distributions $p$ over random variables $x_1$, $x_2$,… that are defined by an undirected graph $\mathcal{G}$ and have the form:
 
 $$
-p(x_1, x_2,…) = \frac{1}{Z}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(x_c)} \\
+p(x_1, x_2,…) = \frac{1}{Z}\prod_{c\,{\scriptstyle \in}\,C}{\phi_c(x_c)} \\
 \footnotesize\textrm{where Z is a normalization term} \\
 \footnotesize\textrm{and C is the set of cliques in $\mathcal{G}$}
 $$
@@ -469,7 +469,7 @@ The additional level of generality comes at a cost, however: the normalization t
 CRFs are random fields globally conditioned on a set of observations $x$ [@Lafferty2001] and have the form:
 
 $$
-p(y|x) = \frac{1}{Z(x)}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(y_c, x_c)} \\
+p(y|x) = \frac{1}{Z(x)}\prod_{c\,{\scriptstyle \in}\,C}{\phi_c(y_c, x_c)} \\
 \footnotesize\textrm{where Z is a normalization term} \\
 \footnotesize\textrm{and C is the set of cliques in the} \\
 \footnotesize\textrm{graph $\mathcal{G}$ representing the labels $y$}
@@ -506,7 +506,7 @@ In the case of linear-chain CRFs, inference can be done efficiently using modifi
 Global conditioning on $x$ helps CRFs avoid the label bias problem [@McCallum2000]. As discussed above, the problem mostly affects models with local probability normalization, including MEMMs [@Hannun2019]. CRFs avoid this since they model the probability of the entire state sequence $p(y|x)$, which has a single, global normalization term $Z$:
 
 $$
-p(x_1, x_2,…) = \frac{1}{Z}\prod_{c\,{\scriptscriptstyle \in}\,C}{\phi_c(x_c)} \\
+p(x_1, x_2,…) = \frac{1}{Z}\prod_{c\,{\scriptstyle \in}\,C}{\phi_c(x_c)} \\
 \footnotesize\textrm{where Z is a normalization term} \\
 \footnotesize\textrm{and C is the set of cliques in $\mathcal{G}$}
 $$
