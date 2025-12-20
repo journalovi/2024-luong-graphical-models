@@ -8,7 +8,7 @@ const globalVariables = css`
   :root {
     /* Colors */
     --color-white: #f1f2f4;
-    --color-black: #212529;
+    --color-black: #050505;
 
     /* Paper palette */
     ${paperPalette}

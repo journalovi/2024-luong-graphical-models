@@ -75,15 +75,15 @@ const Heatmap = ({
 
 									if (!isDefined(value)) return <TD key={group} />
 
-									const whiteText = dark ? value < 0.5 : value > 0.5
+									const whiteText = dark ? value < 0.5 : value > 0.75
 
 									const labelOpacity = dark
 										? value < 0.25
 											? 0.5 + value
 											: 0.75 + value / 4
 										: value < 0.25
-										? 0.6 + value
-										: 0.85 + value / 6
+											? 0.6 + value
+											: 0.85 + value / 6
 
 									return (
 										<TD key={group}>
@@ -244,6 +244,9 @@ const TDLabel = styled.span<{ whiteText: boolean; opacity: number }>`
 	${(p) => p.theme.text.small}
 	${(p) => p.whiteText && `text-shadow: var(--box-shadow-text);`}
 	color: ${(p) => (p.whiteText ? 'var(--color-white)' : 'var(--color-black)')};
+	text-shadow:
+		${(p) => (p.whiteText ? 'var(--color-black)' : 'var(--color-white)')} 0 0 2em,
+		${(p) => (p.whiteText ? 'var(--color-black)' : 'var(--color-white)')} 0 0 2em;
 	opacity: ${(p) => p.opacity};
 `
 
