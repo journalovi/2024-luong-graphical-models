@@ -347,7 +347,7 @@ const SVG = styled.svg`
 	}
 	g.node-wrap.faded,
 	g.edge-wrap.faded {
-		opacity: 0.2;
+		opacity: 0.4;
 	}
 	g.edges .edge-label {
 		fill: var(--color-label);
