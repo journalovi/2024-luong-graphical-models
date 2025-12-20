@@ -7,11 +7,10 @@ export interface IconProps {
 	size?: IconSize
 	color?: string
 	className?: string
-	useAlt?: boolean
 }
 
 interface SVGProps extends IconProps {
-	alt: string
+	'aria-label': string
 	children: ReactNode
 }
 
@@ -27,9 +26,8 @@ const SVG = ({
 	size = 'm',
 	color = 'currentColor',
 	className,
-	alt,
-	useAlt = false,
 	children,
+	...props
 }: SVGProps) => {
 	return (
 		<StyledSVG
@@ -39,7 +37,7 @@ const SVG = ({
 			viewBox="0 0 24 24"
 			className={className}
 			$color={color}
-			{...(useAlt && { alt })}
+			{...props}
 		>
 			{children}
 		</StyledSVG>
